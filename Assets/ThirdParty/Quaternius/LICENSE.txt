@@ -1,0 +1,6 @@
+Quaternius assets — CC0 (Public Domain)
+
+Source: https://quaternius.com/
+License: Creative Commons Zero — no attribution required, but appreciated.
+
+Assets used from Quaternius are tracked in Doc/CREDITS.md.

@@ -1,0 +1,19 @@
+{
+    "name": "DriftAssignment.Character",
+    "rootNamespace": "DriftAssignment.Character",
+    "references": [
+        "DriftAssignment.Core",
+        "DriftAssignment.Vehicle",
+        "DriftAssignment.Input",
+        "Unity.InputSystem"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

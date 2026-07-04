@@ -1,0 +1,17 @@
+{
+    "name": "DriftAssignment.Vehicle",
+    "rootNamespace": "DriftAssignment.Vehicle",
+    "references": [
+        "DriftAssignment.Core",
+        "DriftAssignment.Input"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
