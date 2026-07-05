@@ -77,11 +77,20 @@ namespace DriftAssignment.Vehicle
         [Range(0f, 1f)] [SerializeField] private float _tireMaxVolume = 0.8f;
         [SerializeField] private float _tireVolumeSmoothing = 6f;
 
-        [Header("Impact")]
+        [Header("Impact — speed + target-weight tier picker")]
+        [Tooltip("Minimum impulse magnitude to fire any impact sound (filters micro-scrapes)")]
         [SerializeField] private float _lightImpactThreshold = 3f;
-        [SerializeField] private float _mediumImpactThreshold = 8f;
-        [SerializeField] private float _heavyImpactThreshold = 20f;
+        [Tooltip("Speed at/above which the medium impact bank becomes eligible (needs a heavy target)")]
+        [SerializeField] private float _mediumSpeedKmh = 30f;
+        [Tooltip("Speed at/above which the heavy impact bank becomes eligible (needs a heavy target)")]
+        [SerializeField] private float _highSpeedKmh = 70f;
+        [Tooltip("Rigidbody mass at/above which the collided object counts as 'heavy roadblock'. Static geometry (no Rigidbody) is always heavy.")]
+        [SerializeField] private float _heavyTargetMassKg = 50f;
         [SerializeField] private float _impactCooldownSeconds = 0.08f;
+        [Tooltip("Collisions on these layers (e.g. Terrain / road) are ignored so belly-scrape and wheel-bounce during drift don't fire crash SFX.")]
+        [SerializeField] private LayerMask _ignoreCollisionLayers;
+        [Tooltip("Reject a contact if its normal is within this angle of world-up (contact is 'from below', i.e. ground). 0 disables.")]
+        [Range(0f, 89f)] [SerializeField] private float _rejectGroundNormalAngle = 40f;
 
         [Header("Debug")]
         [SerializeField] private bool _debugLog = false;
@@ -265,20 +274,46 @@ namespace DriftAssignment.Vehicle
             if (_sounds == null || _impactSource == null) return;
             if (Time.time - _lastImpactTime < _impactCooldownSeconds) return;
 
+            // Layer filter — terrain / road etc.
+            if (((1 << collision.gameObject.layer) & _ignoreCollisionLayers.value) != 0)
+            {
+                if (_debugLog) Debug.Log($"[CarAudio] Rejected {collision.gameObject.name} on ignored layer", this);
+                return;
+            }
+
+            // Ground-normal filter — reject belly scrapes / wheel bounces during drift
+            if (_rejectGroundNormalAngle > 0f)
+            {
+                var contactNormal = collision.GetContact(0).normal;
+                var upDot = Vector3.Dot(contactNormal, Vector3.up);
+                var thresholdCos = Mathf.Cos(_rejectGroundNormalAngle * Mathf.Deg2Rad);
+                if (upDot > thresholdCos)
+                {
+                    if (_debugLog) Debug.Log($"[CarAudio] Rejected ground contact (normal.y={upDot:F2})", this);
+                    return;
+                }
+            }
+
             var impulse = collision.impulse.magnitude;
-            AudioClip[] bank = null;
-            string tier = null;
-            if (impulse > _heavyImpactThreshold) { bank = _sounds.MetalHeavy; tier = "Heavy"; }
-            else if (impulse > _mediumImpactThreshold) { bank = _sounds.MetalMedium; tier = "Medium"; }
-            else if (impulse > _lightImpactThreshold) { bank = _sounds.MetalLight; tier = "Light"; }
-            else return;
+            if (impulse < _lightImpactThreshold) return; // filter micro-scrapes
+
+            var speed = _car != null ? _car.SpeedKmh : 0f;
+            var otherRb = collision.rigidbody;
+            var targetMass = otherRb != null ? otherRb.mass : float.MaxValue; // static geometry = heavy
+            var heavyTarget = targetMass >= _heavyTargetMassKg;
+
+            AudioClip[] bank;
+            string tier;
+            if (speed >= _highSpeedKmh && heavyTarget)      { bank = _sounds.MetalHeavy;  tier = "Heavy"; }
+            else if (speed >= _mediumSpeedKmh && heavyTarget) { bank = _sounds.MetalMedium; tier = "Medium"; }
+            else                                             { bank = _sounds.MetalLight;  tier = "Light"; }
 
             var clip = _sounds.PickRandom(bank);
             if (clip == null) return;
             _impactSource.PlayOneShot(clip);
             _lastImpactTime = Time.time;
 
-            if (_debugLog) Debug.Log($"[CarAudio] Impact impulse={impulse:F1} → {tier}", this);
+            if (_debugLog) Debug.Log($"[CarAudio] Impact impulse={impulse:F1} speed={speed:F0}km/h targetMass={targetMass:F0} → {tier}", this);
         }
     }
 }

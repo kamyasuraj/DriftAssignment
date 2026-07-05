@@ -10,6 +10,11 @@ namespace DriftAssignment.Damage
     public class ImpactReceiver : MonoBehaviour
     {
         [SerializeField] private DamageConfig _config;
+        [Header("Ground-contact filter")]
+        [Tooltip("Collisions with these layers are ignored. Set to include the terrain / road so belly-scrape + wheel-bounce during drift don't fire impact SFX or paint damage.")]
+        [SerializeField] private LayerMask _ignoreLayers;
+        [Tooltip("Reject a contact if its normal is within this angle of world-up (contact is 'from below', i.e. ground). Set to 0 to disable.")]
+        [Range(0f, 89f)] [SerializeField] private float _rejectGroundNormalAngle = 40f;
         [SerializeField] private bool _debugLog = false;
 
         private IDamageable[] _damageables;
@@ -34,6 +39,15 @@ namespace DriftAssignment.Damage
         private void OnCollisionEnter(Collision collision)
         {
             if (_config == null || _damageables == null) return;
+
+            // Ignore-layer filter (typically Terrain / road) — kills belly-scrape and
+            // wheel-bounce spam during hard drifts.
+            if (((1 << collision.gameObject.layer) & _ignoreLayers.value) != 0)
+            {
+                if (_debugLog) Debug.Log($"[ImpactReceiver] Rejected {collision.gameObject.name} on ignored layer {LayerMask.LayerToName(collision.gameObject.layer)}", this);
+                return;
+            }
+
             var impulse = collision.impulse;
             var mag = impulse.magnitude;
             if (mag < _config.MinDentImpulse)
@@ -43,6 +57,21 @@ namespace DriftAssignment.Damage
             }
 
             var contact = collision.GetContact(0);
+
+            // Ground-normal filter: if the contact normal is close to world-up, the
+            // car body has kissed the ground (or a very flat surface underneath) —
+            // that's not a "you hit a wall" event.
+            if (_rejectGroundNormalAngle > 0f)
+            {
+                var upDot = Vector3.Dot(contact.normal, Vector3.up);
+                var thresholdCos = Mathf.Cos(_rejectGroundNormalAngle * Mathf.Deg2Rad);
+                if (upDot > thresholdCos)
+                {
+                    if (_debugLog) Debug.Log($"[ImpactReceiver] Rejected {collision.gameObject.name} — ground-like contact (normal.y={upDot:F2})", this);
+                    return;
+                }
+            }
+
             int routed = 0;
             foreach (var d in _damageables)
             {

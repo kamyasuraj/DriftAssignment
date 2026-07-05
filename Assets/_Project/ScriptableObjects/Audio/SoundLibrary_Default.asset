@@ -27,23 +27,13 @@ MonoBehaviour:
   PassBy: {fileID: 8300000, guid: 8cb57e8ab5e2c5945910bb4a23076b29, type: 3}
   UphillPassBy: {fileID: 8300000, guid: e98840483c3e2a7499f357993b714aa4, type: 3}
   MetalLight:
-  - {fileID: 8300000, guid: 8833969d9a6ead84ca6a4ee49146ffb0, type: 3}
-  - {fileID: 8300000, guid: 033e4d24bd8d01a45ac803182175d3f0, type: 3}
-  - {fileID: 8300000, guid: 64c09d7a78eec0c4fbadd7fe74657893, type: 3}
-  - {fileID: 8300000, guid: 83310bff28053fa4d952f724817eed5d, type: 3}
-  - {fileID: 8300000, guid: 14011a5d2f40ca44cac8ed05f6b9fbd1, type: 3}
+  - {fileID: 8300000, guid: 532cbbd19b2108c4bb579438d2212bea, type: 3}
+  - {fileID: 8300000, guid: c316ce0ab448dfa4ca488762fdd5a903, type: 3}
+  - {fileID: 8300000, guid: 3dc19e7cd1472ad449e4a6ffbd73b669, type: 3}
   MetalMedium:
-  - {fileID: 8300000, guid: 07edf0a2528a98e49bf29a5fccceda0f, type: 3}
-  - {fileID: 8300000, guid: abadc18d76c7751469f4697a1f924a40, type: 3}
-  - {fileID: 8300000, guid: 36e3970c85846384dad7a6bec7884034, type: 3}
-  - {fileID: 8300000, guid: 8b6ed546ba841064b907c0f87325c43a, type: 3}
-  - {fileID: 8300000, guid: 6181d61b505ed1843b5f8720906d7e89, type: 3}
+  - {fileID: 8300000, guid: a5e4041fe20e8f846aefa7203ffd702a, type: 3}
   MetalHeavy:
-  - {fileID: 8300000, guid: be8e556eab070a44f9c15c731cce2719, type: 3}
-  - {fileID: 8300000, guid: 3455df811222bb54da72c95a132397a4, type: 3}
-  - {fileID: 8300000, guid: e5d29e50aa3f174429ec8f067491cc6f, type: 3}
-  - {fileID: 8300000, guid: e9676c85fec6cc24e85b41fe9f942a94, type: 3}
-  - {fileID: 8300000, guid: cf76fde1f6d2c784e8551bcb09e93dac, type: 3}
+  - {fileID: 8300000, guid: 410374b1f18b8c9439fa782f9635fd8a, type: 3}
   PlateLight:
   - {fileID: 8300000, guid: 1100c0131ca95444fa3bd6f364e584ea, type: 3}
   - {fileID: 8300000, guid: 3cd897a346d271d4bb1f7da5a1cbfb5e, type: 3}
