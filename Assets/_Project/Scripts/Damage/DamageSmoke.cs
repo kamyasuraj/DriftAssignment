@@ -23,6 +23,10 @@ namespace DriftAssignment.Damage
         [SerializeField] private Color _startColor = new Color(0.35f, 0.32f, 0.3f, 0.65f);
         [SerializeField] private Vector3 _localVelocity = new Vector3(0f, 1.4f, 0f);
 
+        [Header("Optional")]
+        [Tooltip("If assigned, overrides the procedural puff material — e.g. Smoke_thick.mat from imported effect pack")]
+        [SerializeField] private Material _overrideMaterial;
+
         private ParticleSystem _ps;
         private static Material s_sharedParticleMaterial;
 
@@ -31,7 +35,9 @@ namespace DriftAssignment.Damage
             _ps = GetComponent<ParticleSystem>();
             if (_ps == null) _ps = gameObject.AddComponent<ParticleSystem>();
             ConfigureParticleSystem();
-            AssignUrpParticleMaterial(GetComponent<ParticleSystemRenderer>());
+            var psr = GetComponent<ParticleSystemRenderer>();
+            if (_overrideMaterial != null) psr.sharedMaterial = _overrideMaterial;
+            else AssignUrpParticleMaterial(psr);
             if (_health == null) _health = GetComponentInParent<CarHealth>();
         }
 

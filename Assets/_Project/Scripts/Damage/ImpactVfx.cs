@@ -3,11 +3,10 @@ using UnityEngine;
 namespace DriftAssignment.Damage
 {
     /// Listens to ImpactReceiver.DamageDealt. On each qualifying hit spawns:
-    ///  - a spark burst (bright, short-lived)
-    ///  - a dust puff (grey, spreads, fades)
-    ///  - a scratch decal quad projected onto the nearest panel and parented
-    ///    to the car so it moves with damage.
-    /// All resources are generated at runtime — no prefab dependencies.
+    ///  - a spark burst — additive-blended, per-particle trails, glow-like
+    ///  - a dust puff — grey, spreads outward, alpha-fades
+    /// Paint spoilage is handled by PaintDamage (writes into the material's
+    /// albedo texture at impact UVs); this component focuses on airborne VFX.
     [DisallowMultipleComponent]
     public class ImpactVfx : MonoBehaviour
     {
@@ -18,24 +17,36 @@ namespace DriftAssignment.Damage
         [SerializeField] private float _minImpulseForVfx = 8f;
         [SerializeField] private float _heavyImpulseThreshold = 300f;
 
-        [Header("Scratch decal")]
-        [SerializeField] private float _decalMinSize = 0.15f;
-        [SerializeField] private float _decalMaxSize = 0.55f;
-        [SerializeField] private float _decalLifetime = 30f;
-        [SerializeField] private int _maxLiveDecals = 40;
+        [Header("Sparks (grinder-style streaks)")]
+        [SerializeField] private int _sparkBaseCount = 60;
+        [SerializeField] private int _sparkIntensityCount = 220;
+        [SerializeField] private float _sparkSpeedMin = 8f;
+        [SerializeField] private float _sparkSpeedMax = 28f;
+        [SerializeField] private float _sparkSize = 0.045f;
+        [SerializeField] private float _sparkLifetimeMin = 0.4f;
+        [SerializeField] private float _sparkLifetimeMax = 1.1f;
+        [SerializeField] private float _sparkStretchLength = 3.4f;
+        [SerializeField] private float _sparkConeAngle = 32f;
+
+        [Header("Dust")]
+        [SerializeField] private int _dustBaseCount = 6;
+        [SerializeField] private int _dustIntensityCount = 24;
+
+        [Header("Optional imported assets")]
+        [Tooltip("If assigned, this prefab is instantiated at contact instead of the procedural spark system (e.g. Spark.prefab from effect pack)")]
+        [SerializeField] private GameObject _sparkPrefab;
+        [SerializeField] private float _sparkPrefabLifetime = 2.5f;
 
         [Header("Debug")]
         [SerializeField] private bool _debugLog = false;
 
-        private Material _scratchMaterial;
-        private Mesh _quadMesh;
-        private System.Collections.Generic.Queue<GameObject> _decalPool = new System.Collections.Generic.Queue<GameObject>();
+        private static Material s_sparkMaterial;
 
         private void Awake()
         {
             if (_receiver == null) _receiver = GetComponent<ImpactReceiver>();
             if (_carRoot == null) _carRoot = transform;
-            BuildScratchAssets();
+            EnsureSparkMaterial();
         }
 
         private void OnEnable()
@@ -48,120 +59,136 @@ namespace DriftAssignment.Damage
             if (_receiver != null) _receiver.DamageDealt -= OnImpact;
         }
 
-        private void BuildScratchAssets()
+        private static void EnsureSparkMaterial()
         {
-            _quadMesh = new Mesh { name = "ImpactVfx.Quad" };
-            _quadMesh.vertices = new[]
-            {
-                new Vector3(-0.5f, -0.5f, 0f),
-                new Vector3( 0.5f, -0.5f, 0f),
-                new Vector3( 0.5f,  0.5f, 0f),
-                new Vector3(-0.5f,  0.5f, 0f),
-            };
-            _quadMesh.uv = new[] { new Vector2(0, 0), new Vector2(1, 0), new Vector2(1, 1), new Vector2(0, 1) };
-            _quadMesh.triangles = new[] { 0, 1, 2, 0, 2, 3 };
-            _quadMesh.RecalculateNormals();
-
-            var tex = GenerateScratchTexture(128);
-            var shader = Shader.Find("Universal Render Pipeline/Unlit");
-            if (shader == null) shader = Shader.Find("Unlit/Transparent");
-            _scratchMaterial = new Material(shader);
-            _scratchMaterial.mainTexture = tex;
-            _scratchMaterial.color = new Color(0.05f, 0.05f, 0.05f, 1f);
-            _scratchMaterial.SetFloat("_Surface", 1f); // transparent for URP Unlit
-            _scratchMaterial.SetFloat("_Blend", 0f);
-            _scratchMaterial.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
-            _scratchMaterial.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
-            _scratchMaterial.SetInt("_ZWrite", 0);
-            _scratchMaterial.EnableKeyword("_SURFACE_TYPE_TRANSPARENT");
-            _scratchMaterial.renderQueue = 3000;
+            if (s_sparkMaterial != null) return;
+            var shader = Shader.Find("Universal Render Pipeline/Particles/Unlit");
+            if (shader == null) shader = Shader.Find("Universal Render Pipeline/Unlit");
+            if (shader == null) shader = Shader.Find("Sprites/Default");
+            s_sparkMaterial = new Material(shader) { name = "URP.Particle.SparkAdditive" };
+            s_sparkMaterial.color = new Color(1.5f, 1.2f, 0.4f, 1f); // HDR-boosted for bloom-friendliness
+            s_sparkMaterial.mainTexture = BuildSparkTexture(64);
+            s_sparkMaterial.SetTexture("_BaseMap", s_sparkMaterial.mainTexture);
+            s_sparkMaterial.SetFloat("_Surface", 1f);
+            s_sparkMaterial.SetFloat("_Blend", 1f); // 1 = additive on URP Particles Unlit
+            s_sparkMaterial.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+            s_sparkMaterial.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.One); // additive
+            s_sparkMaterial.SetInt("_ZWrite", 0);
+            s_sparkMaterial.EnableKeyword("_SURFACE_TYPE_TRANSPARENT");
+            s_sparkMaterial.EnableKeyword("_ALPHAPREMULTIPLY_ON");
+            s_sparkMaterial.renderQueue = 3050;
         }
 
-        private Texture2D GenerateScratchTexture(int size)
+        private static Texture2D BuildSparkTexture(int size)
         {
-            var tex = new Texture2D(size, size, TextureFormat.RGBA32, false);
+            var tex = new Texture2D(size, size, TextureFormat.RGBA32, true);
             tex.wrapMode = TextureWrapMode.Clamp;
+            tex.filterMode = FilterMode.Bilinear;
             var pixels = new Color32[size * size];
-            var center = new Vector2(size * 0.5f, size * 0.5f);
+            var center = (size - 1) * 0.5f;
             var maxDist = size * 0.5f;
-
-            // Radial fade + noisy scratches
             for (int y = 0; y < size; y++)
             {
                 for (int x = 0; x < size; x++)
                 {
-                    var d = Vector2.Distance(new Vector2(x, y), center) / maxDist;
-                    var alpha = Mathf.Clamp01(1f - d);
-                    alpha *= alpha; // sharpen
-                    alpha *= Random.Range(0.4f, 1f); // grainy
-                    pixels[y * size + x] = new Color32(20, 15, 15, (byte)(alpha * 255));
-                }
-            }
-            // Add streaks
-            for (int s = 0; s < 6; s++)
-            {
-                var start = new Vector2(Random.Range(0, size), Random.Range(0, size));
-                var dir = Random.insideUnitCircle.normalized * Random.Range(size * 0.15f, size * 0.35f);
-                int steps = 40;
-                for (int i = 0; i < steps; i++)
-                {
-                    var t = i / (float)steps;
-                    var p = start + dir * t;
-                    int px = Mathf.Clamp(Mathf.RoundToInt(p.x), 0, size - 1);
-                    int py = Mathf.Clamp(Mathf.RoundToInt(p.y), 0, size - 1);
-                    pixels[py * size + px] = new Color32(10, 8, 8, 255);
+                    var dx = (x - center) / maxDist;
+                    var dy = (y - center) / maxDist;
+                    var d = Mathf.Sqrt(dx * dx + dy * dy);
+                    var a = Mathf.Clamp01(1f - d);
+                    a = a * a * a; // hot core, soft halo
+                    pixels[y * size + x] = new Color32(255, 255, 255, (byte)(a * 255));
                 }
             }
             tex.SetPixels32(pixels);
-            tex.Apply();
+            tex.Apply(true);
             return tex;
         }
 
-        private void OnImpact(float impulse, Vector3 worldContact)
+        private void OnImpact(float impulse, Vector3 worldContact, Vector3 worldNormal)
         {
             if (impulse < _minImpulseForVfx) return;
-
-            var normalized = Mathf.InverseLerp(_minImpulseForVfx, _heavyImpulseThreshold, impulse);
-            SpawnBurst(worldContact, normalized);
-            SpawnScratch(worldContact, normalized);
-            if (_debugLog) Debug.Log($"[ImpactVfx] impact impulse={impulse:F1} normalized={normalized:F2}", this);
+            var n = Mathf.InverseLerp(_minImpulseForVfx, _heavyImpulseThreshold, impulse);
+            SpawnSparks(worldContact, worldNormal, n);
+            SpawnDust(worldContact, n);
+            if (_debugLog) Debug.Log($"[ImpactVfx] impulse={impulse:F1} n={n:F2}", this);
         }
 
-        private void SpawnBurst(Vector3 world, float intensity)
+        private void SpawnSparks(Vector3 world, Vector3 normal, float intensity)
         {
-            var go = new GameObject("ImpactBurst");
+            if (_sparkPrefab != null)
+            {
+                var rot = Quaternion.LookRotation(normal.sqrMagnitude > 0.01f ? normal : Vector3.up);
+                var inst = Instantiate(_sparkPrefab, world, rot);
+                inst.name = "ImpactSparks(prefab)";
+                var pss = inst.GetComponentsInChildren<ParticleSystem>(true);
+                foreach (var p in pss)
+                {
+                    var m = p.main;
+                    // Scale the burst by intensity so light taps don't fire welder-torch sparks
+                    m.startSpeedMultiplier = 0.8f + intensity * 1.4f;
+                    m.startSizeMultiplier = 0.7f + intensity * 0.9f;
+                    p.Play(true);
+                }
+                Destroy(inst, _sparkPrefabLifetime);
+                return;
+            }
+            var go = new GameObject("ImpactSparks");
             go.transform.position = world;
+            go.transform.rotation = Quaternion.LookRotation(normal.sqrMagnitude > 0.01f ? normal : Vector3.up);
+
             var ps = go.AddComponent<ParticleSystem>();
-            DamageSmoke.AssignUrpParticleMaterial(go.GetComponent<ParticleSystemRenderer>());
+            var psr = go.GetComponent<ParticleSystemRenderer>();
+            psr.sharedMaterial = s_sparkMaterial;
+            psr.renderMode = ParticleSystemRenderMode.Stretch;
+            psr.lengthScale = _sparkStretchLength;
+            psr.velocityScale = 0.12f;
+
             var main = ps.main;
-            main.duration = 0.25f;
+            main.duration = 0.35f;
             main.loop = false;
-            main.startLifetime = 0.5f + intensity * 0.8f;
-            main.startSpeed = 3f + intensity * 6f;
-            main.startSize = 0.03f + intensity * 0.08f;
-            main.startColor = new Color(1f, 0.7f, 0.2f, 1f);
-            main.gravityModifier = 0.6f;
+            main.startLifetime = new ParticleSystem.MinMaxCurve(_sparkLifetimeMin, _sparkLifetimeMax);
+            main.startSpeed = new ParticleSystem.MinMaxCurve(_sparkSpeedMin, _sparkSpeedMax * (0.7f + intensity * 0.6f));
+            main.startSize = new ParticleSystem.MinMaxCurve(_sparkSize * 0.5f, _sparkSize * (1.1f + intensity * 0.5f));
+            main.startColor = new Color(1f, 0.9f, 0.4f, 1f);
+            main.gravityModifier = 1.4f;
+            main.maxParticles = 600;
             main.stopAction = ParticleSystemStopAction.Destroy;
 
             var emission = ps.emission;
             emission.rateOverTime = 0f;
-            emission.SetBurst(0, new ParticleSystem.Burst(0f, (short)(6 + intensity * 40)));
+            var burstCount = (short)(_sparkBaseCount + intensity * _sparkIntensityCount);
+            emission.SetBurst(0, new ParticleSystem.Burst(0f, burstCount));
 
             var shape = ps.shape;
-            shape.shapeType = ParticleSystemShapeType.Sphere;
-            shape.radius = 0.05f;
+            shape.shapeType = ParticleSystemShapeType.Cone;
+            shape.angle = _sparkConeAngle;
+            shape.radius = 0.02f;
 
             var col = ps.colorOverLifetime;
             col.enabled = true;
             var grad = new Gradient();
             grad.SetKeys(
-                new[] { new GradientColorKey(new Color(1f, 0.85f, 0.3f), 0f), new GradientColorKey(new Color(0.4f, 0.2f, 0.1f), 1f) },
-                new[] { new GradientAlphaKey(1f, 0f), new GradientAlphaKey(0f, 1f) });
+                new[]
+                {
+                    new GradientColorKey(new Color(1f, 1f, 0.85f), 0f),
+                    new GradientColorKey(new Color(1f, 0.55f, 0.15f), 0.55f),
+                    new GradientColorKey(new Color(0.35f, 0.12f, 0.03f), 1f),
+                },
+                new[] { new GradientAlphaKey(1f, 0f), new GradientAlphaKey(0.9f, 0.5f), new GradientAlphaKey(0f, 1f) });
             col.color = grad;
 
-            // dust puff — second particle system on same GO
+            var sizeOverLifetime = ps.sizeOverLifetime;
+            sizeOverLifetime.enabled = true;
+            var sc = new AnimationCurve(new Keyframe(0f, 1f), new Keyframe(1f, 0.15f));
+            sizeOverLifetime.size = new ParticleSystem.MinMaxCurve(1f, sc);
+
+            Destroy(go, 3f);
+        }
+
+        private void SpawnDust(Vector3 world, float intensity)
+        {
             var dustGo = new GameObject("ImpactDust");
-            dustGo.transform.SetParent(go.transform, false);
+            dustGo.transform.position = world;
             var dust = dustGo.AddComponent<ParticleSystem>();
             DamageSmoke.AssignUrpParticleMaterial(dustGo.GetComponent<ParticleSystemRenderer>());
             var dmain = dust.main;
@@ -175,7 +202,7 @@ namespace DriftAssignment.Damage
             dmain.stopAction = ParticleSystemStopAction.Destroy;
             var dem = dust.emission;
             dem.rateOverTime = 0f;
-            dem.SetBurst(0, new ParticleSystem.Burst(0f, (short)(4 + intensity * 20)));
+            dem.SetBurst(0, new ParticleSystem.Burst(0f, (short)(_dustBaseCount + intensity * _dustIntensityCount)));
             var dshape = dust.shape;
             dshape.shapeType = ParticleSystemShapeType.Sphere;
             dshape.radius = 0.1f;
@@ -187,38 +214,7 @@ namespace DriftAssignment.Damage
                 new[] { new GradientAlphaKey(0.5f, 0f), new GradientAlphaKey(0f, 1f) });
             dcol.color = dgrad;
 
-            Destroy(go, 2f);
-        }
-
-        private void SpawnScratch(Vector3 world, float intensity)
-        {
-            if (_decalPool.Count >= _maxLiveDecals)
-            {
-                var oldest = _decalPool.Dequeue();
-                if (oldest != null) Destroy(oldest);
-            }
-
-            var go = new GameObject("Scratch");
-            go.transform.position = world;
-            // Face outward (away from car center) with random spin
-            var toCar = (_carRoot.position - world).normalized;
-            go.transform.rotation = Quaternion.LookRotation(toCar) * Quaternion.Euler(0f, 0f, Random.Range(0f, 360f));
-            // Nudge slightly outward so it doesn't z-fight
-            go.transform.position += -toCar * 0.005f;
-            go.transform.SetParent(_carRoot, true);
-
-            var size = Mathf.Lerp(_decalMinSize, _decalMaxSize, intensity) * Random.Range(0.7f, 1.3f);
-            go.transform.localScale = new Vector3(size, size, size);
-
-            var mf = go.AddComponent<MeshFilter>();
-            mf.sharedMesh = _quadMesh;
-            var mr = go.AddComponent<MeshRenderer>();
-            mr.sharedMaterial = _scratchMaterial;
-            mr.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
-            mr.receiveShadows = false;
-
-            _decalPool.Enqueue(go);
-            if (_decalLifetime > 0f) Destroy(go, _decalLifetime);
+            Destroy(dustGo, 2.5f);
         }
     }
 }

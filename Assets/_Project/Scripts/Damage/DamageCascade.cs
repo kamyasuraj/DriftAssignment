@@ -92,7 +92,7 @@ namespace DriftAssignment.Damage
             if (_debugLog) Debug.Log($"[DamageCascade] Stage '{stage.Name}' fired at dmg≥{stage.DamageFraction:P0} → hid {hidden} parts", this);
         }
 
-        private void OnImpact(float impulse, Vector3 worldContact)
+        private void OnImpact(float impulse, Vector3 worldContact, Vector3 worldNormal)
         {
             if (_allGlass == null || _allGlass.Length == 0) return;
             var effective = impulse * _propagationImpulseBoost;

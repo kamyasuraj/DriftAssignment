@@ -23660,13 +23660,14 @@ MonoBehaviour:
   _health: {fileID: 0}
   _startAtDamage: 0.5
   _maxAtDamage: 0.95
-  _maxEmissionRate: 7
+  _maxEmissionRate: 14
   _startLifetime: 2.5
   _startSpeed: 1.3
   _startSizeMin: 0.35
   _startSizeMax: 0.9
   _startColor: {r: 0.35, g: 0.32, b: 0.3, a: 0.45}
   _localVelocity: {x: 0, y: 1.7, z: 0}
+  _overrideMaterial: {fileID: 2100000, guid: 97de08415789a694eb7b2ac89fd4e9d9, type: 2}
 --- !u!1 &884617507 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4537057345693906361, guid: 11318eb3fe3cac2499159d6a437003b8, type: 3}
@@ -27411,13 +27412,14 @@ MonoBehaviour:
   _health: {fileID: 0}
   _startAtDamage: 0.35
   _maxAtDamage: 0.9
-  _maxEmissionRate: 11
+  _maxEmissionRate: 22
   _startLifetime: 2.5
   _startSpeed: 1.3
   _startSizeMin: 0.35
   _startSizeMax: 0.9
   _startColor: {r: 0.35, g: 0.32, b: 0.3, a: 0.45}
   _localVelocity: {x: 0, y: 1.4, z: 0}
+  _overrideMaterial: {fileID: 2100000, guid: 97de08415789a694eb7b2ac89fd4e9d9, type: 2}
 --- !u!1 &1533696873 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4311950789961207488, guid: 03bdbe0aaa354314baeb42115c89e01e, type: 3}
@@ -27714,13 +27716,14 @@ MonoBehaviour:
   _health: {fileID: 0}
   _startAtDamage: 0.6
   _maxAtDamage: 1
-  _maxEmissionRate: 5
+  _maxEmissionRate: 10
   _startLifetime: 2.5
   _startSpeed: 1.3
   _startSizeMin: 0.15
   _startSizeMax: 0.4
   _startColor: {r: 0.15, g: 0.13, b: 0.12, a: 0.45}
   _localVelocity: {x: 0, y: 0.4, z: -1.3}
+  _overrideMaterial: {fileID: 2100000, guid: 97de08415789a694eb7b2ac89fd4e9d9, type: 2}
 --- !u!1 &1573928108
 GameObject:
   m_ObjectHideFlags: 0
@@ -106179,6 +106182,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 9041432283490599144, guid: 834b316c2b5f2e146ae22f9c7e385366, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1976696543}
+    - targetCorrespondingSourceObject: {fileID: 9041432283490599144, guid: 834b316c2b5f2e146ae22f9c7e385366, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1976696544}
     - targetCorrespondingSourceObject: {fileID: 95139061599167425, guid: 834b316c2b5f2e146ae22f9c7e385366, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1968392726}
@@ -106537,10 +106543,19 @@ MonoBehaviour:
   _carRoot: {fileID: 0}
   _minImpulseForVfx: 8
   _heavyImpulseThreshold: 300
-  _decalMinSize: 0.15
-  _decalMaxSize: 0.55
-  _decalLifetime: 30
-  _maxLiveDecals: 40
+  _sparkBaseCount: 18
+  _sparkIntensityCount: 90
+  _sparkSpeedMin: 5
+  _sparkSpeedMax: 22
+  _sparkSize: 0.06
+  _sparkLifetimeMin: 0.6
+  _sparkLifetimeMax: 1.6
+  _sparkStretchLength: 3.4
+  _sparkConeAngle: 32
+  _dustBaseCount: 6
+  _dustIntensityCount: 24
+  _sparkPrefab: {fileID: 0}
+  _sparkPrefabLifetime: 2.5
   _debugLog: 0
 --- !u!114 &1976696542
 MonoBehaviour:
@@ -106612,6 +106627,32 @@ MonoBehaviour:
     Fired: 0
   _propagationRadius: 1.2
   _propagationImpulseBoost: 1.5
+  _debugLog: 1
+--- !u!114 &1976696544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1976696521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd5eaee311416e84a9cf428e564940bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _receiver: {fileID: 0}
+  _config: {fileID: 11400000, guid: 78efd5ce366286d4483cc6295698ffe8, type: 2}
+  _paintMaterial: {fileID: 2100000, guid: f34eb1aaa5df1ce4888bd0841ed78da3, type: 2}
+  _paintMeshFilter: Paint
+  _damageColor: {r: 0.06, g: 0.05, b: 0.05, a: 1}
+  _centerDotRadius: 4
+  _scratchLinesMin: 5
+  _scratchLinesMax: 12
+  _scratchLenMin: 10
+  _scratchLenMax: 35
+  _brushIntensity: 0.75
+  _paintRadiusMultiplier: 1.25
+  _maxClustersPerPanel: 6
   _debugLog: 1
 --- !u!1 &1983943358
 GameObject:

@@ -14,9 +14,11 @@ namespace DriftAssignment.Damage
 
         private IDamageable[] _damageables;
 
-        /// (impulseMagnitude, worldContactPoint) — fires once per qualifying collision
-        /// AND once per DebugImpact call. Consumers: CarHealth, ImpactVfx.
-        public event Action<float, Vector3> DamageDealt;
+        /// (impulseMagnitude, worldContactPoint, worldSurfaceNormal) — fires once per
+        /// qualifying collision AND once per DebugImpact call. Consumers: CarHealth,
+        /// ImpactVfx, DamageCascade. The surface normal points AWAY from the car,
+        /// so decals should orient facing +normal.
+        public event Action<float, Vector3, Vector3> DamageDealt;
 
         private void Awake()
         {
@@ -49,8 +51,8 @@ namespace DriftAssignment.Damage
                 d.ReceiveImpact(contact.point, impulse, mag);
                 routed++;
             }
-            DamageDealt?.Invoke(mag, contact.point);
-            if (_debugLog) Debug.Log($"[ImpactReceiver] Hit {collision.gameObject.name} impulse={mag:F1} at {contact.point} → routed to {routed} damageables", this);
+            DamageDealt?.Invoke(mag, contact.point, contact.normal);
+            if (_debugLog) Debug.Log($"[ImpactReceiver] Hit {collision.gameObject.name} impulse={mag:F1} at {contact.point} normal={contact.normal} → routed to {routed} damageables", this);
         }
 
         /// Bypasses OnCollisionEnter — routes a synthetic impact at a world-space
@@ -67,7 +69,10 @@ namespace DriftAssignment.Damage
                 d.ReceiveImpact(worldContact, impulse, magnitude);
                 routed++;
             }
-            DamageDealt?.Invoke(magnitude, worldContact);
+            // For scripted hits the outward-facing surface normal is the opposite of
+            // the inward push direction fed by the test panel.
+            var normal = -worldInwardDir.normalized;
+            DamageDealt?.Invoke(magnitude, worldContact, normal);
             if (_debugLog) Debug.Log($"[ImpactReceiver] DEBUG impact at {worldContact} mag={magnitude:F1} → routed to {routed} damageables", this);
             return routed;
         }

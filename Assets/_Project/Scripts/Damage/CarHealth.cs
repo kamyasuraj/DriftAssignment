@@ -35,7 +35,7 @@ namespace DriftAssignment.Damage
             if (_receiver != null) _receiver.DamageDealt -= OnDamage;
         }
 
-        private void OnDamage(float impulseMagnitude, Vector3 worldContact)
+        private void OnDamage(float impulseMagnitude, Vector3 worldContact, Vector3 worldNormal)
         {
             AccumulatedDamage += impulseMagnitude;
             HealthChanged?.Invoke(HealthNormalized);
