@@ -122704,7 +122704,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1925129249}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2069611701}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -126816,6 +126816,19 @@ Texture2D:
     offset: 0
     size: 0
     path: 
+--- !u!134 &2069611701
+PhysicsMaterial:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  serializedVersion: 2
+  m_DynamicFriction: 0.6
+  m_StaticFriction: 0.6
+  m_Bounciness: 0
+  m_FrictionCombine: 0
+  m_BounceCombine: 0
 --- !u!1 &2069633785 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4555176454548381575, guid: 34022bcfac40ad346bb28a79eb0633a6, type: 3}
@@ -126848,6 +126861,55 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
+--- !u!1 &2072886194
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2072886196}
+  - component: {fileID: 2072886195}
+  m_Layer: 0
+  m_Name: StressTestCapture
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2072886195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2072886194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 192c8e294aecf514c816f2370a00dc30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _label: before
+  _durationSeconds: 60
+  _startAutomaticallyOnPlay: 1
+  _startDelaySeconds: 3
+  _showOverlay: 1
+--- !u!4 &2072886196
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2072886194}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2073702636 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3753389339623426370, guid: 834b316c2b5f2e146ae22f9c7e385366, type: 3}
@@ -128112,3 +128174,4 @@ SceneRoots:
   - {fileID: 759976246}
   - {fileID: 268397879}
   - {fileID: 908655900}
+  - {fileID: 2072886196}

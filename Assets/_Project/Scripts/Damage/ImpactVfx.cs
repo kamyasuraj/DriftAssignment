@@ -137,6 +137,7 @@ namespace DriftAssignment.Damage
             go.transform.rotation = Quaternion.LookRotation(normal.sqrMagnitude > 0.01f ? normal : Vector3.up);
 
             var ps = go.AddComponent<ParticleSystem>();
+            ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
             var psr = go.GetComponent<ParticleSystemRenderer>();
             psr.sharedMaterial = s_sparkMaterial;
             psr.renderMode = ParticleSystemRenderMode.Stretch;
@@ -182,6 +183,7 @@ namespace DriftAssignment.Damage
             var sc = new AnimationCurve(new Keyframe(0f, 1f), new Keyframe(1f, 0.15f));
             sizeOverLifetime.size = new ParticleSystem.MinMaxCurve(1f, sc);
 
+            ps.Play(true);
             Destroy(go, 3f);
         }
 
@@ -190,6 +192,7 @@ namespace DriftAssignment.Damage
             var dustGo = new GameObject("ImpactDust");
             dustGo.transform.position = world;
             var dust = dustGo.AddComponent<ParticleSystem>();
+            dust.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
             DamageSmoke.AssignUrpParticleMaterial(dustGo.GetComponent<ParticleSystemRenderer>());
             var dmain = dust.main;
             dmain.duration = 0.4f;
@@ -214,6 +217,7 @@ namespace DriftAssignment.Damage
                 new[] { new GradientAlphaKey(0.5f, 0f), new GradientAlphaKey(0f, 1f) });
             dcol.color = dgrad;
 
+            dust.Play(true);
             Destroy(dustGo, 2.5f);
         }
     }
