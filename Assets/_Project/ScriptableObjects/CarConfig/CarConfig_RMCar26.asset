@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2de51090eeaad0e46a133289e1c44b3f, type: 3}
+  m_Name: CarConfig_RMCar26
+  m_EditorClassIdentifier: 
+  Mass: 1500
+  CenterOfMassOffset: {x: 0, y: -0.4, z: 0.1}
+  LinearDrag: 0.05
+  AngularDrag: 0.15
+  MaxMotorTorque: 2200
+  MaxBrakeTorque: 3800
+  MaxHandBrakeTorque: 5500
+  MinRpm: 900
+  MaxRpm: 7500
+  RpmSmoothing: 8
+  DefaultDrivetrain: 1
+  GearRatios:
+  - -3.2
+  - 0
+  - 3.6
+  - 2.2
+  - 1.55
+  - 1.2
+  - 0.95
+  - 0.78
+  FinalDriveRatio: 3.5
+  UpshiftRpm: 6800
+  DownshiftRpm: 2600
+  MaxSteerAngle: 32
+  MinSteerAngleAtTopSpeed: 12
+  SteerSpeedNormalization: 40
+  SteerLerpSpeed: 8
+  ForwardExtremumSlip: 0.4
+  ForwardExtremumValue: 1
+  ForwardAsymptoteSlip: 0.8
+  ForwardAsymptoteValue: 0.7
+  ForwardStiffness: 1.8
+  SidewaysExtremumSlip: 0.25
+  SidewaysExtremumValue: 1
+  SidewaysAsymptoteSlip: 0.55
+  SidewaysAsymptoteValue: 0.7
+  SidewaysStiffness: 1.5
+  SidewaysStiffnessOnHandBrake: 0.55
