@@ -1,7 +1,0 @@
-Mixamo assets — Adobe / Mixamo Terms
-
-Source: https://www.mixamo.com/
-License: Free with an Adobe account. Usage governed by Mixamo Terms of Service.
-        See https://www.mixamo.com/faq for licensing details.
-
-Assets used from Mixamo are tracked in Doc/CREDITS.md.

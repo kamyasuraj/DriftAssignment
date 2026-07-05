@@ -142,6 +142,7 @@ Legend: 🟢 done | 🟡 partially done | 🔴 pending
 | Add | `Assets/_Project/ScriptableObjects/{TuningPresets,CarConfig}/` | 🟢 | 0 |
 | Add | `Assets/_Project/Materials`, `Textures`, `Audio`, `Fonts` | 🟢 | 0 |
 | Add | `Assets/ThirdParty/{Kenney,Quaternius,Mixamo}/` with `LICENSE.txt` | 🟢 | 0 / 1 |
+| Add (Phase 1) | `Assets/ThirdParty/{PolyHaven,Sketchfab,PolyPizza}/` with `LICENSE.txt` — as needed | 🔴 pending | 1 |
 | Add | Assembly Definitions per module (`DriftAssignment.*`) | 🟢 all 7 created | 0 |
 
 ### 3.5 Repo-level docs & tooling

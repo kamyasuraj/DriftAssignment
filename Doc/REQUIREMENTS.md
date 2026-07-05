@@ -32,7 +32,7 @@ A polished, mobile-first driving game inspired by the *Arabic Drifting* Android 
 ## 2. Assumptions
 
 - Single-player, no networking, no persistence across sessions
-- One car and one map at launch (long wide desert road, matching reference screenshots)
+- One car and one map at launch — **desert circuit / drift loop** (~600–1000 m lap with straights, hairpins, and a sweeper), styled after the reference desert environment
 - Touch controls on device; keyboard fallback available in the Editor for development
 - **Free / CC0 assets only** — no paid Asset Store purchases
 - Interview evaluators judge on: physics feel, damage system quality, code architecture, mobile performance, and documentation quality
@@ -125,21 +125,42 @@ Unity Editor must be running with the CoplayDev Unity MCP window open (serving o
 
 ## 6. Damage System Spec
 
-Two stages, both driven by per-part `accumulatedImpact` (running sum of impulse magnitudes above a small floor threshold).
+Hero car is **RMCar26** (from Realistic Mobile Cars — Pro3DModels demo pack, see §8). The prefab is already articulated into separate GameObjects per panel, door, glass pane, and wheel — no manual splitting needed.
+
+Both stages driven by per-part `accumulatedImpact` (running sum of impulse magnitudes above a small floor threshold).
 
 ### Stage A — Dent (0 → dent threshold)
 - Real-time mesh vertex displacement in a radius around each contact point
 - Vertices displaced along surface normal, weighted by distance falloff
 - Original vertex positions cached on `Awake` for reset / debug
 - MeshCollider (convex) stays static; only the visual mesh deforms — keeps physics stable and cheap
-- Applied to a small set of deformable panels: hood, doors, front bumper, rear bumper, roof, fenders
+- **Applied to (RMCar26 mesh names)**:
+  - `Body_A` — main body shell
+  - `BodyFrontBumper_A`, `BodyFrontBumper2_A` — front bumper (dents before detachment)
+  - `BodyRearBumper_A` — rear bumper
+  - `Body_A_DoorFrontLeft`, `Body_A_DoorFrontRight` — front-door skin panels
+  - `Body_A_DoorRearLeft`, `Body_A_DoorRearRight` — rear-door skin panels
 
 ### Stage B — Break (dent threshold → break threshold)
-- Each detachable part starts parented to the car (or joined via `FixedJoint`)
-- On threshold hit: unparent, add `Rigidbody`, add convex `MeshCollider`, inherit car's velocity, add impact impulse
-- Detachable parts: front & rear bumpers, doors (L/R), hood, trunk, side mirrors, wheels (extreme damage only)
+- Each detachable part starts parented to the car; on threshold hit: unparent, add `Rigidbody`, add convex `MeshCollider`, inherit car's velocity, add impact impulse
 - Broken parts live for **N seconds** then despawn (mobile memory budget)
-- Windshield: shader swap to shattered glass at high front-impact damage
+- **Detachable parts (RMCar26 mesh names)**:
+  - `BodyFrontBumper_A` + `PaintFrontBumper_A` — front bumper (skin + paint layer detach together)
+  - `BodyRearBumper_A` — rear bumper
+  - `DoorFrontLeft`, `DoorFrontRight` — front doors
+  - `DoorRearLeft`, `DoorRearRight` — rear doors
+  - `WheelFrontLeft/Right`, `WheelRearLeft/Right` — wheels at extreme damage only
+  - `LicensePlate`, `PaintSpoiler_A` — cosmetic bits shed early
+- **Glass shatter** (visual swap, not physical detach):
+  - `GlassFront` (windshield): shader swap to shattered glass on heavy front impact
+  - `GlassRear`: same on rear impact
+  - `WindowsFrontLeft/Right`, `WindowsRearLeft/Right`, `Windows` (side panels): hide + spawn shard particle burst on side impact
+
+### Character enter/exit tie-in
+The four `Door*` GameObjects are individual meshes with their own pivots. **Character enter/exit** (§7 stretch goal) hinge-rotates `DoorFrontLeft` (or `DoorFrontRight`) around its Y-axis for open/close animation before hiding the character mesh into the car interior. No additional rigging needed.
+
+### Dashboard tie-in
+The prefab exposes `SteeringWheel`, `rpmArrow`, `SpeedArrow` as separate GameObjects — the in-car HUD can drive their local rotation directly from `CarController` events, giving a working analog dashboard without extra art.
 
 ### Fallback path
 If runtime mesh deformation proves too costly on target Android hardware, swap to a **3-tier prefab-swap** approach: `pristine → dented mesh variant → broken/parts-hidden variant`. This fallback is toggleable per platform; documented explicitly rather than silently discovered later.
@@ -159,19 +180,22 @@ Only shipped if polished; a half-finished stretch feature hurts more than skippi
 
 ## 8. Free Asset Sources
 
+**Style target**: low-poly but *slightly realistic* — clean silhouettes, mature color palette, no thick cartoon outlines. Kenney's aesthetic (cartoony, chunky, kid-game vibe) is **not** the target. We prefer **Quaternius**, **Sketchfab CC0**, and **Poly Pizza** for meshes.
+
 | Asset | Source | License | Notes |
 |---|---|---|---|
-| Low-poly sedan | [Kenney Car Kit](https://kenney.nl/assets/car-kit) | CC0 | Modular; matches reference silhouette |
-| Alt: sedan mesh | [Poly Pizza](https://poly.pizza) | CC0 / CC-BY | Search "sedan low poly" |
-| Alt: sedan mesh | [Quaternius Ultimate Vehicles](https://quaternius.com/packs/ultimatevehicles.html) | CC0 | Large pack, mobile-friendly |
-| Desert environment | [Kenney Nature Kit](https://kenney.nl/assets/nature-kit) + [Kenney Road Kit](https://kenney.nl/assets/road-kit) | CC0 | Assemble long road + dune flanks |
-| Palm trees | [Poly Pizza](https://poly.pizza) — search "palm" | CC0 / CC-BY | Line the road as in reference |
-| Skybox | [Poly Haven HDRIs](https://polyhaven.com/hdris) | CC0 | Clear desert sky |
-| Character rig + anims | [Mixamo](https://www.mixamo.com/) | Free (Adobe account) | Idle, walk, enter-car, exit-car anims |
+| **Hero car (chosen)** | [Realistic Mobile Car #26 (Demo)](https://assetstore.unity.com/packages/3d/vehicles/land/realistic-mobile-car-26-demo-305319) — Surdov Vadym | Unity Asset Store EULA (free demo) | RMCar26 — fully articulated: separate bumpers, 4 doors, side/front/rear glass, wheels, brake rotors, lights, working dashboard parts. LODs 0–3 baked in. |
+| Additional cars (later) | [Sketchfab — CC0 filter](https://sketchfab.com/search?type=models&features=downloadable&licenses=322a749bcfa841b29dff1e8a1bb74b0b) | CC0 | Only if we ship the garage car-select — otherwise skip |
+| Circuit / road system | [EasyRoads3D Free (Asset Store)](https://assetstore.unity.com/packages/tools/terrain/easyroads3d-free-v3-987) | Free | Spline-based circuit builder, terrain-aware |
+| Circuit (alt / DIY) | Unity Splines (already installed) + custom mesh extrusion | — | Fallback if EasyRoads3D free tier limits us |
+| Desert props (dunes, rocks) | [Quaternius Ultimate Nature](https://quaternius.com/packs/ultimatenature.html) | CC0 | Cleaner style than Kenney |
+| Palm trees | [Quaternius Ultimate Nature](https://quaternius.com/packs/ultimatenature.html) or [Poly Pizza — "palm"](https://poly.pizza/search/palm) | CC0 | Line the circuit as in reference |
+| Skybox | [Poly Haven — desert HDRIs](https://polyhaven.com/hdris/skies) | CC0 | Clear-sky HDRIs (2K is enough) |
+| Character rig + anims (stretch) | [Mixamo](https://www.mixamo.com/) | Free (Adobe account) | Idle, walk, enter-car, exit-car anims |
 | Car physics reference | [Prometeo Car Controller](https://github.com/Mecanik/PrometeoCarController) | MIT | **Reference only** — we write our own |
 | Impact / crash SFX | [Freesound.org](https://freesound.org) (CC0 filter) | CC0 | Crashes, dents, glass breaks |
 | Engine audio | [Sonniss GDC packs](https://sonniss.com/gameaudiogdc) | Royalty-free | High-quality engine loops |
-| UI icons | [Kenney Game Icons / Input Prompts](https://kenney.nl/assets) | CC0 | Pedal, arrow, gear icons |
+| UI icons | [Kenney Game Icons / Input Prompts](https://kenney.nl/assets) | CC0 | Icons only — flat vector, style-neutral, fine to use here |
 | Fonts | Google Fonts (SIL Open Font License) | OFL | Any techy sans-serif |
 
 **Attribution**: every used asset is tracked in [`CREDITS.md`](CREDITS.md) with source + license.
@@ -246,7 +270,7 @@ Each phase below produces observable output. The [Implementation Log](IMPLEMENTA
 | # | Phase | Output |
 |---|---|---|
 | 0 | Initial Project Setup | Android target, URP tuned, folder tree, asmdefs, MCP verified |
-| 1 | Environment & Assets | Desert road scene matching reference |
+| 1 | Environment & Assets | Desert **circuit** scene (~600–1000 m loop) with straights, hairpins, sweeper |
 | 2 | Car Physics | Drivable sedan (keyboard in Editor) |
 | 3 | Camera System | Chase / hood / cinematic / look-back Cinemachine cams |
 | 4 | Touch HUD | On-screen controls: steering, pedals, gear, RPM, camera |
