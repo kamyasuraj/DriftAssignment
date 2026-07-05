@@ -1,0 +1,25 @@
+{
+  "label": "after",
+  "timestamp": "2026-07-05T18:21:47",
+  "unity_version": "6000.0.69f1",
+  "platform": "WindowsEditor",
+  "quality_level": "Mobile",
+  "screen": "1920x1080",
+  "duration_target_s": 60.00,
+  "duration_actual_s": 60.00,
+  "sample_count": 6087,
+  "interrupted": false,
+  "metrics": {
+    "fps":                     { "avg": 102.58, "min": 0.30, "max": 124.73, "p50": 103.09, "p95": 117.54, "p99": 120.77 },
+    "main_thread_ms":          { "avg": 10.404, "min": 8.003, "max": 2923.939, "p50": 9.689, "p95": 11.629, "p99": 13.166 },
+    "render_thread_ms":        { "avg": 0.000, "min": 0.000, "max": 0.000, "p50": 0.000, "p95": 0.000, "p99": 0.000 },
+    "physics_simulate_ms":     { "avg": 0.071, "min": 0.000, "max": 1.336, "p50": 0.000, "p95": 0.175, "p99": 0.221 },
+    "batches":                 { "avg": 175, "min": 0, "max": 461, "p50": 168, "p95": 218, "p99": 222 },
+    "set_pass_calls":          { "avg": 53, "min": 0, "max": 98, "p50": 53, "p95": 61, "p99": 62 },
+    "draw_calls":              { "avg": 189, "min": 0, "max": 466, "p50": 183, "p95": 234, "p99": 240 },
+    "triangles":               { "avg": 124941, "min": 0, "max": 433555, "p50": 124848, "p95": 143792, "p99": 147216 },
+    "vertices":                { "avg": 108797, "min": 0, "max": 380618, "p50": 108756, "p95": 125216, "p99": 128974 },
+    "gc_alloc_bytes_per_frame":{ "avg": 68209, "min": 52478, "max": 64621223, "p50": 53247, "p95": 79746, "p99": 86160 },
+    "system_used_memory_bytes":{ "avg": 3269608350, "min": 3264516096, "max": 3271794688, "p50": 3269550080, "p95": 3271766016, "p99": 3271766016 }
+  }
+}

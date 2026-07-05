@@ -43,6 +43,12 @@ namespace DriftAssignment.UI.Hud
             if (_tuning != null) _tuning.Changed -= OnTuningChanged;
         }
 
+        private static readonly string[] _gearLabels =
+            { "R", "N", "1", "2", "3", "4", "5", "6", "7", "8" };
+
+        private int _lastSpeed = int.MinValue;
+        private int _lastRpm = int.MinValue;
+
         private void OnTuningChanged()
         {
             if (_gearModeText != null)
@@ -53,19 +59,27 @@ namespace DriftAssignment.UI.Hud
 
         private void OnSpeed(float kmh)
         {
-            if (_speedText != null) _speedText.text = $"{kmh:0}";
+            if (_speedText == null) return;
+            int rounded = Mathf.RoundToInt(kmh);
+            if (rounded == _lastSpeed) return;
+            _lastSpeed = rounded;
+            _speedText.SetText("{0}", rounded);
         }
 
         private void OnGear(int gearIndex)
         {
             if (_gearText == null) return;
-            string label = gearIndex == 0 ? "R" : gearIndex == 1 ? "N" : (gearIndex - 1).ToString();
-            _gearText.text = label;
+            int idx = Mathf.Clamp(gearIndex, 0, _gearLabels.Length - 1);
+            _gearText.text = _gearLabels[idx];
         }
 
         private void OnRpm(float rpm)
         {
-            if (_rpmText != null) _rpmText.text = $"{rpm:0}";
+            if (_rpmText == null) return;
+            int rounded = Mathf.RoundToInt(rpm);
+            if (rounded == _lastRpm) return;
+            _lastRpm = rounded;
+            _rpmText.SetText("{0}", rounded);
         }
     }
 }

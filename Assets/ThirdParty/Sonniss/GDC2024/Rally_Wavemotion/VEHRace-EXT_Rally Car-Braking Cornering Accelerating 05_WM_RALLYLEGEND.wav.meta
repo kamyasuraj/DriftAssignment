@@ -12,7 +12,16 @@ AudioImporter:
     quality: 0.6
     conversionMode: 0
     preloadAudioData: 0
-  platformSettingOverrides: {}
+  platformSettingOverrides:
+    Android:
+      serializedVersion: 2
+      loadType: 1
+      sampleRateSetting: 1
+      sampleRateOverride: 0
+      compressionFormat: 1
+      quality: 0.5
+      conversionMode: 0
+      preloadAudioData: 0
   forceToMono: 1
   normalize: 1
   loadInBackground: 0

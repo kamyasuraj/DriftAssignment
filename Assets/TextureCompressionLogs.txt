@@ -1,0 +1,694 @@
+Texture Optimization Log - 05-07-2026 18:11:18
+
+Assets\TextMesh Pro\Sprites\EmojiOne.png
+Old → Size:512, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\AerialBeach\aerial_beach_01_ao_2k.jpg
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\AerialBeach\aerial_beach_01_arm_2k.jpg
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\AerialBeach\aerial_beach_01_diff_2k.jpg
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\AerialBeach\aerial_beach_01_disp_2k.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\AerialSand\aerial_sand_ao_2k.jpg
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\AerialSand\aerial_sand_arm_2k.jpg
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\AerialSand\aerial_sand_diff_2k.jpg
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\AerialSand\aerial_sand_disp_2k.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\GroundSand005\GroundSand005_AO_2K.jpg
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\GroundSand005\GroundSand005_BUMP_2K.jpg
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\GroundSand005\GroundSand005_COL_2K.jpg
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\GroundSand005\GroundSand005_DISP_2K.jpg
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\GroundSand005\GroundSand005_GLOSS_2K.jpg
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\GroundSand005\GroundSand005_NRM_2K.jpg
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\GroundSand005\GroundSand005_Preview1.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\GroundSand005\GroundSand005_REFL_2K.jpg
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Mixed Brick Wall\mixed_brick_wall_ao_2k.jpg
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Mixed Brick Wall\mixed_brick_wall_arm_2k.jpg
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Mixed Brick Wall\mixed_brick_wall_diff_2k.jpg
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Mixed Brick Wall\mixed_brick_wall_disp_2k.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\_Project\Icons\accelerator.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\_Project\Icons\brake.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\_Project\Icons\ChaseCam.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\_Project\Icons\Cinematic.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\_Project\Icons\close.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\_Project\Icons\GS.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\_Project\Icons\hand-brake.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\_Project\Icons\Helicopeter.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\_Project\Icons\Icon.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\_Project\Icons\minus.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\_Project\Icons\plus.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\_Project\Icons\right-chevron.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\_Project\Icons\settings.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\EasyRoads3D scenes\Terrain Assets\Grass ER.psd
+Old → Size:1024, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\EasyRoads3D scenes\Terrain Assets\Grass ER.tga
+Old → Size:1024, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\EasyRoads3D scenes\Terrain Assets\Grass2 ER.psd
+Old → Size:1024, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\EffectTexturesAndPrefabs\Textures\fire_A.png
+Old → Size:64, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\EffectTexturesAndPrefabs\Textures\heart.png
+Old → Size:64, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\EffectTexturesAndPrefabs\Textures\light.png
+Old → Size:64, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\EffectTexturesAndPrefabs\Textures\light_ring.png
+Old → Size:256, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\EffectTexturesAndPrefabs\Textures\MuzzleFlash.tga
+Old → Size:512, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\EffectTexturesAndPrefabs\Textures\particle_A.png
+Old → Size:32, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\EffectTexturesAndPrefabs\Textures\ShockWave.png
+Old → Size:256, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\EffectTexturesAndPrefabs\Textures\slash.png
+Old → Size:128, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\EffectTexturesAndPrefabs\Textures\smoke_n.png
+Old → Size:64, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\EffectTexturesAndPrefabs\Textures\smoke_thick.png
+Old → Size:64, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\EffectTexturesAndPrefabs\Textures\smoke_thin.png
+Old → Size:64, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\EffectTexturesAndPrefabs\Textures\SparkParticle.png
+Old → Size:64, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\EffectTexturesAndPrefabs\Textures\star_A.png
+Old → Size:64, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\EffectTexturesAndPrefabs\Textures\star_B.png
+Old → Size:64, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Blue waste bin 2k_normal.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Blue waste bin diffuse 1k.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Blue waste bin roughness 2k.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Concrete barrier End_color.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Concrete barrier End_normal.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Concrete barrier End_roughness.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Concrete barrier End_specular.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Concrete barrier_color.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Concrete barrier_normal.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Concrete barrier_roughness.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Concrete barrier_specular.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Green Big Dumpster_color_done.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Green Big Dumpster_roughness.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Green small waste bin_color 2k.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Green small waste bin_metallic.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Green small waste bin_normal 2k.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Green small waste bin_roughness 2k.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Long barrier_color.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Long barrier_metallic.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Long barrier_normal.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Long barrier_roughness.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Long barrier_specular.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Red barrier_color.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Red barrier_normal.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Red barrier_roughness.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Red barrier_specular.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Right turn_color.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Right turn_metallic.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Right turn_normal.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Right turn_roughness.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Right turn_specular.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Short barrier_color.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Short barrier_metallic.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Short barrier_normal.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Short barrier_roughness.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Short barrier_specular.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Slow_color.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Slow_metallic.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Slow_normal.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Slow_roughness.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Slow_specular.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Speed breaker 1_color.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Speed breaker 1_metallic.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Speed breaker 1_normal.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Speed breaker 1_roughness.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Speed breaker 1_specular.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Speed breaker 2_color.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Speed breaker 2_metallic.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Speed breaker 2_normal.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Speed breaker 2_roughness.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Speed breaker 2_specular.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Speed breaker 3_color.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Speed breaker 3_metallic.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Speed breaker 3_normal.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Speed breaker 3_roughness.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Speed breaker 3_specular.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Speed breaker 4_color.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Speed breaker 4_metallic.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Speed breaker 4_normal.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Speed breaker 4_roughness.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Speed breaker 4_specular.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Stop_color.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Stop_metallic.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Stop_normal.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Stop_roughness.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Stop_specular.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Traffic barrel_color.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Traffic barrel_metallic.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Traffic barrel_normal.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Traffic barrel_roughness.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Traffic cone 1_color.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Traffic cone 1_normal.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Traffic cone 1_roughness.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Traffic cone 2_color.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Traffic cone 2_normal.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Traffic cone 2_roughness.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\U turn_color.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\U turn_metallic.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\U turn_normal.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\U turn_roughness.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\U turn_specular.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Water barrel 1_color.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Water barrel 1_normal.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Water barrel 1_roughness.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Water barrel 1_specular.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Water barrel 2_color.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Water barrel 2_normal.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Water barrel 2_roughness.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Water barrel 2_specular.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Water barrel 3_color.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Water barrel 3_normal.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Water barrel 3_roughness.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\Water barrel 3_specular.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\White barrier_color.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\White barrier_normal.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\White barrier_roughness.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Simple Street Props\Textures\White barrier_specular.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\EasyRoads3D\textures\editor\locked.png
+Old → Size:32, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\EasyRoads3D\textures\editor\m_build.png
+Old → Size:1024, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\EasyRoads3D\textures\editor\m_header.png
+Old → Size:32, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\EasyRoads3D\textures\editor\m_info.png
+Old → Size:64, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\EasyRoads3D\textures\editor\m_prefabs.png
+Old → Size:32, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\EasyRoads3D\textures\editor\m_road.png
+Old → Size:32, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\EasyRoads3D\textures\editor\m_roads.png
+Old → Size:32, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\EasyRoads3D\textures\editor\m_scene.png
+Old → Size:32, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\EasyRoads3D\textures\editor\m_settings.png
+Old → Size:32, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\EasyRoads3D\textures\editor\m_so.png
+Old → Size:32, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\EasyRoads3D\textures\editor\unlocked.png
+Old → Size:32, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\EasyRoads3D\textures\roads\default_M_S_AO.tga
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\EasyRoads3D\textures\roads\dirtRoad_A.tga
+Old → Size:1024, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\EasyRoads3D\textures\roads\dirtRoad_N.tga
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\EasyRoads3D\textures\roads\road2Lane_A.tga
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\EasyRoads3D\textures\roads\road_N.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\RealisticMobileCars - Pro3DModels\Main\Materials\RMCarCarbon.tga
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\RealisticMobileCars - Pro3DModels\RMCar26\Materials\RMCar26BodyAlbedo.tga
+Old → Size:4096, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\RealisticMobileCars - Pro3DModels\RMCar26\Materials\RMCar26BodyEmissive.tga
+Old → Size:4096, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\RealisticMobileCars - Pro3DModels\RMCar26\Materials\RMCar26BodyMetallicSmoothness.tga
+Old → Size:4096, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\RealisticMobileCars - Pro3DModels\RMCar26\Materials\RMCar26BodyNormal.tga
+Old → Size:4096, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\RealisticMobileCars - Pro3DModels\RMCar26\Materials\RMCar26Paint.png
+Old → Size:4096, Format:CompressedHQ, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\RealisticMobileCars - Pro3DModels\RMCar26\Materials\RMCar26PaintAo.tga
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Road props for games\Textures\2k\Road_props_textures_2k.png
+Old → Size:2048, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
+Assets\ThirdParty\Road props for games\Textures\512\Road_props_textures_512.png
+Old → Size:512, Format:Compressed, Crunch:False
+New → Size:512, Format:AutomaticCompressed, Crunch:True, Compression:50
+
