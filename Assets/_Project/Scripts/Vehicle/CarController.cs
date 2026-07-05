@@ -21,6 +21,9 @@ namespace DriftAssignment.Vehicle
         [Header("Input Source (implements IInputProvider)")]
         [SerializeField] private MonoBehaviour _inputSource;
 
+        [Header("Debug")]
+        [SerializeField] private bool _debugLog = true;
+
         private Rigidbody _rigidbody;
         private IInputProvider _input;
         private Drivetrain _drivetrain;
@@ -68,12 +71,29 @@ namespace DriftAssignment.Vehicle
             _handBrake = new HandBrake(_wheelRL, _wheelRR, _config);
             _steering = new SteeringAssist(_wheelFL, _wheelFR, _config);
 
-            _gearBox.GearChanged += g => GearChanged?.Invoke(g);
+            _gearBox.GearChanged += OnGearChanged;
             _gearBox.RpmChanged += r => RpmChanged?.Invoke(r);
 
             ApplyFrictionCurves();
 
             if (_tuning != null) _tuning.Changed += OnTuningChanged;
+
+            if (_debugLog)
+            {
+                Debug.Log($"[CarController] Awake. Drivetrain={_tuning?.Drivetrain ?? _config.DefaultDrivetrain} " +
+                          $"Transmission={(_tuning?.AutomaticTransmission ?? true ? "Auto" : "Manual")} " +
+                          $"Mass={_config.Mass}kg CoM={_config.CenterOfMassOffset} MaxTorque={_config.MaxMotorTorque}", this);
+            }
+        }
+
+        private void OnGearChanged(int gear)
+        {
+            GearChanged?.Invoke(gear);
+            if (_debugLog)
+            {
+                var label = gear == 0 ? "R" : gear == 1 ? "N" : (gear - 1).ToString();
+                Debug.Log($"[CarController] Gear → {label} (index {gear})", this);
+            }
         }
 
         private void OnDestroy()
@@ -90,14 +110,42 @@ namespace DriftAssignment.Vehicle
             var brake = _input.Brake;
             var steer = Mathf.Clamp(_input.Steer, -1f, 1f);
 
+            var localVel = transform.InverseTransformDirection(_rigidbody.linearVelocity);
+            var forwardVel = localVel.z;
+            var goingForward = forwardVel > 0.5f;
+            var goingReverse = forwardVel < -0.5f;
+            var inReverse = _gearBox.CurrentGear == 0;
+
+            // Automatic reverse — brake at low speed while going forward or stopped → shift to reverse
+            if (automatic)
+            {
+                if (brake > 0.1f && throttle < 0.1f && !goingForward && !inReverse)
+                {
+                    _gearBox.SetReverse();
+                    inReverse = true;
+                    if (_debugLog) Debug.Log("[CarController] Auto → Reverse (brake at low speed)", this);
+                }
+                else if (throttle > 0.1f && inReverse && !goingReverse)
+                {
+                    _gearBox.SetForwardFirst();
+                    inReverse = false;
+                    if (_debugLog) Debug.Log("[CarController] Auto → 1st (throttle from stopped reverse)", this);
+                }
+            }
+
+            // In reverse, S = motor drive (backwards), W = brake to stop.
+            float motorInput, brakeInput;
+            if (inReverse) { motorInput = brake; brakeInput = throttle; }
+            else           { motorInput = throttle; brakeInput = brake; }
+
             var drivenRpm = _drivetrain.AverageDrivenWheelRpm(mode);
-            _gearBox.Update(drivenRpm, throttle, automatic, _input.ShiftUp, _input.ShiftDown);
+            _gearBox.Update(drivenRpm, motorInput, automatic, _input.ShiftUp, _input.ShiftDown);
 
             var gearRatio = _gearBox.GetGearRatio();
             var motorSign = Mathf.Sign(gearRatio);
-            var motorTorque = throttle * _config.MaxMotorTorque * motorSign;
+            var motorTorque = motorInput * _config.MaxMotorTorque * motorSign;
 
-            _drivetrain.ApplyBrake(brake * _config.MaxBrakeTorque);
+            _drivetrain.ApplyBrake(brakeInput * _config.MaxBrakeTorque);
             _drivetrain.ApplyTorque(motorTorque, mode);
             _handBrake.Apply(_input.HandBrake);
 

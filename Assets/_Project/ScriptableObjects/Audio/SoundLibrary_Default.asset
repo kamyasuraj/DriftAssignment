@@ -1,0 +1,98 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5241082841e51704ba8b0611bf22750e, type: 3}
+  m_Name: SoundLibrary_Default
+  m_EditorClassIdentifier: 
+  EngineSlow: {fileID: 0}
+  EngineIdle: {fileID: 8300000, guid: 268d4682fd8fc9e4fb9ed337d5dba7e1, type: 3}
+  EngineFast: {fileID: 8300000, guid: 94fd2a35d72c9b44e9623c4e2e4c5024, type: 3}
+  HandBrakeInterior: {fileID: 8300000, guid: 7828865f94a3edc4bbc58e4963290dc6, type: 3}
+  DriftBrakingCornering: {fileID: 8300000, guid: 755bc0b94e8b3dc40832dad6866915fe, type: 3}
+  RaceStart: {fileID: 8300000, guid: eca43f6a349965b4b941e23eb858cd68, type: 3}
+  PassBy: {fileID: 8300000, guid: 8cb57e8ab5e2c5945910bb4a23076b29, type: 3}
+  UphillPassBy: {fileID: 8300000, guid: e98840483c3e2a7499f357993b714aa4, type: 3}
+  MetalLight:
+  - {fileID: 8300000, guid: 8833969d9a6ead84ca6a4ee49146ffb0, type: 3}
+  - {fileID: 8300000, guid: 033e4d24bd8d01a45ac803182175d3f0, type: 3}
+  - {fileID: 8300000, guid: 64c09d7a78eec0c4fbadd7fe74657893, type: 3}
+  - {fileID: 8300000, guid: 83310bff28053fa4d952f724817eed5d, type: 3}
+  - {fileID: 8300000, guid: 14011a5d2f40ca44cac8ed05f6b9fbd1, type: 3}
+  MetalMedium:
+  - {fileID: 8300000, guid: 07edf0a2528a98e49bf29a5fccceda0f, type: 3}
+  - {fileID: 8300000, guid: abadc18d76c7751469f4697a1f924a40, type: 3}
+  - {fileID: 8300000, guid: 36e3970c85846384dad7a6bec7884034, type: 3}
+  - {fileID: 8300000, guid: 8b6ed546ba841064b907c0f87325c43a, type: 3}
+  - {fileID: 8300000, guid: 6181d61b505ed1843b5f8720906d7e89, type: 3}
+  MetalHeavy:
+  - {fileID: 8300000, guid: be8e556eab070a44f9c15c731cce2719, type: 3}
+  - {fileID: 8300000, guid: 3455df811222bb54da72c95a132397a4, type: 3}
+  - {fileID: 8300000, guid: e5d29e50aa3f174429ec8f067491cc6f, type: 3}
+  - {fileID: 8300000, guid: e9676c85fec6cc24e85b41fe9f942a94, type: 3}
+  - {fileID: 8300000, guid: cf76fde1f6d2c784e8551bcb09e93dac, type: 3}
+  PlateLight:
+  - {fileID: 8300000, guid: 1100c0131ca95444fa3bd6f364e584ea, type: 3}
+  - {fileID: 8300000, guid: 3cd897a346d271d4bb1f7da5a1cbfb5e, type: 3}
+  - {fileID: 8300000, guid: 6895d1d7d52fdd149b00a09cfbd08f17, type: 3}
+  - {fileID: 8300000, guid: 7405482af7da33a4a8a19a0a3cc7daf9, type: 3}
+  - {fileID: 8300000, guid: 9238fdf8cf0ed32489c08cbb104fe2a6, type: 3}
+  PlateMedium:
+  - {fileID: 8300000, guid: de3eaab1686b89e4b8b64e758a923bf3, type: 3}
+  - {fileID: 8300000, guid: 3dd67c502c49b3a48aabe31dd33ba5c1, type: 3}
+  - {fileID: 8300000, guid: 1b3e37f356063e7459a7f2d728b6d905, type: 3}
+  - {fileID: 8300000, guid: 653201629dc08ba4dad5669a9a6879f8, type: 3}
+  - {fileID: 8300000, guid: f105261aed407aa40be5c1a7dc4350f2, type: 3}
+  PlateHeavy:
+  - {fileID: 8300000, guid: ae9529657bd7d594a9958995817a1384, type: 3}
+  - {fileID: 8300000, guid: d155a87969965ef40ad287d26ee9e78f, type: 3}
+  - {fileID: 8300000, guid: 1fcd912295a85a74a912c33c9a37531d, type: 3}
+  - {fileID: 8300000, guid: 55cad750f098fed46a2800475b7accae, type: 3}
+  - {fileID: 8300000, guid: e65ff3383dbc4664c8a84e2f01bffffa, type: 3}
+  GlassLight:
+  - {fileID: 8300000, guid: 6e1381771c4242840a61dd77e2c5f357, type: 3}
+  - {fileID: 8300000, guid: 3e0c6a03a750cde46814cf028ddc9d15, type: 3}
+  - {fileID: 8300000, guid: c582e3b00eb263841ab7d90bf0343e92, type: 3}
+  - {fileID: 8300000, guid: f63f16d81a8e87946aa248a93482d1c0, type: 3}
+  - {fileID: 8300000, guid: 4f1c2ed2a07fb13488aebbcb616a11f3, type: 3}
+  GlassMedium:
+  - {fileID: 8300000, guid: 6ec944393fd75dd498bc4e04bd8c0d90, type: 3}
+  - {fileID: 8300000, guid: 2f0a063edbc6742429efdc9f8403690b, type: 3}
+  - {fileID: 8300000, guid: ce223b19482a4d247a6414e4bee44db6, type: 3}
+  - {fileID: 8300000, guid: 86a40dc86e3f58e41834e4b40fe87612, type: 3}
+  - {fileID: 8300000, guid: 561c21994096e984eb06f7957ec640b2, type: 3}
+  GlassHeavy:
+  - {fileID: 8300000, guid: 660086beb62b2c844945395bc8a5f7ff, type: 3}
+  - {fileID: 8300000, guid: 8fd5c4605cc13ad47be13c0ac03315f0, type: 3}
+  - {fileID: 8300000, guid: cd0b2b3f099f4164eb02e1b45ed9855d, type: 3}
+  - {fileID: 8300000, guid: 2ae33a94c65eea24180fde41a4d11692, type: 3}
+  - {fileID: 8300000, guid: 3f1b68ac5788cc244a47f9d7ec052577, type: 3}
+  GlassShatterBig: {fileID: 8300000, guid: a1fb0cb593b7aab4b8e9f44e208528b0, type: 3}
+  CarExplosion: {fileID: 8300000, guid: 0b60a41ee88d1624abb4d7d013820ca2, type: 3}
+  MetalCrashDebris: {fileID: 8300000, guid: 8706d1863f8d725499d1e6db798f5fae, type: 3}
+  MetalScreech: {fileID: 8300000, guid: 6141a6681f1a69248b22ea43b13a6a3b, type: 3}
+  MetalImpact: {fileID: 8300000, guid: cd06e38c37f6cfc468e5d4048267f05d, type: 3}
+  MetalReversed: {fileID: 8300000, guid: b5434fe0417a18846a6a9f36cb65c68e, type: 3}
+  GenericLight:
+  - {fileID: 8300000, guid: ffa283fc62900784f821adbb8a5d2f7d, type: 3}
+  - {fileID: 8300000, guid: f7c1c3a1e7fba5048b7e32218812bcf1, type: 3}
+  - {fileID: 8300000, guid: c3b9afa1a91df3240820b6b9684e73c6, type: 3}
+  - {fileID: 8300000, guid: f5d896ad06a64af40a8c50d1bd27ea36, type: 3}
+  - {fileID: 8300000, guid: 0a20152ea909ceb48ab95d34e9b3c667, type: 3}
+  FootstepConcrete:
+  - {fileID: 8300000, guid: ddb6cd7eef216d44f90cbdfde70241df, type: 3}
+  - {fileID: 8300000, guid: 9a2037e75f039c449a150a4efefe4bc7, type: 3}
+  - {fileID: 8300000, guid: d582284f1a88dac4c8dd80b9c912f198, type: 3}
+  - {fileID: 8300000, guid: 40fcbfbda4a924b48b41bcae7ddb8b0b, type: 3}
+  - {fileID: 8300000, guid: 8700de79873252a4883ef668cb98e322, type: 3}
+  UIClick: {fileID: 8300000, guid: b1b5de034461a2e4894f716eccb6b668, type: 3}
+  UICounter: {fileID: 8300000, guid: 557f21dc558630b41900e50a126b1020, type: 3}
+  UIFeedback: {fileID: 8300000, guid: c8c91933e4d3ca2439b5c236f39cc384, type: 3}
+  UIZoom: {fileID: 8300000, guid: 991718e25c42e4e49935487bfa239c36, type: 3}

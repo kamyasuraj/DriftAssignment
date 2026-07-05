@@ -31,6 +31,9 @@ namespace DriftAssignment.Vehicle
                 RpmChanged?.Invoke(EngineRpm);
             }
 
+            // Skip auto-shift logic when in reverse — CarController owns reverse/forward transitions
+            if (CurrentGear == 0) return;
+
             if (automatic)
             {
                 if (EngineRpm > _config.UpshiftRpm && throttle > 0.2f) TryShift(+1);
@@ -57,6 +60,15 @@ namespace DriftAssignment.Vehicle
             if (CurrentGear != 1)
             {
                 CurrentGear = 1;
+                GearChanged?.Invoke(CurrentGear);
+            }
+        }
+
+        public void SetForwardFirst()
+        {
+            if (CurrentGear != 2)
+            {
+                CurrentGear = 2;
                 GearChanged?.Invoke(CurrentGear);
             }
         }
