@@ -30,21 +30,21 @@ The numbers below are order-of-magnitude, not precise.
 
 ## Phase-by-phase log
 
-| Phase | Approx turns | ~Input tokens | ~Output tokens | Notes |
-|---|---|---|---|---|
-| **Phase 0** — Project setup + docs | ~30 | ~250K | ~40K | Big first commit: docs bundle, .editorconfig, folder tree, asmdefs, Android target |
-| **Phase 1** — Desert circuit env | ~40 | ~500K | ~60K | Terrain, sand layers, HDRI, EasyRoads3D circuit (heavy MCP reflection into ER API), 84 track-side props |
-| **Phase 2** — Car physics + damage-prep audio | ~50 | ~800K | ~90K | RMCar26 wired, CarController + Drivetrain/GearBox/HandBrake/SteeringAssist scaffolded, materials URP-fixed, Cinemachine chase, reverse logic added, CarAudio + SoundLibrary SO |
-| **Phase 7** — Damage system | _pending_ | | | Dent + break on RMCar26 panels |
-| **Phase 8** — Polish (SFX / particles / post-process) | _pending_ | | | Audio hook-in beyond current CarAudio, particles, bloom |
-| **Phase 3** — Camera cycle (chase/hood/cinematic/look-back) | _pending_ | | | Cinemachine cams + input cycle |
-| **Phase 4** — Touch HUD | _pending_ | | | Steering arrows, pedals, RPM, gear, speed |
-| **Phase 5** — Tuning menu | _pending_ | | | Sliders wired to TuningState |
-| **Phase 6** — Preset system (0–13) | _pending_ | | | TuningPreset SOs + picker |
-| **Phase 9** — Optimization pass | _pending_ | | | Cross-cutting, see `Doc/OPTIMIZATION.md` |
-| **Phase 10** — Character enter/exit (stretch) | _pending_ | | | Only if time permits |
-| **Phase 11** — Documentation finalization + PDF export | _pending_ | | | Ship |
-| **Running total (estimated)** | ~120 | **~1.55M** | **~190K** | Rough estimate — **verify via Anthropic Console** |
+| Phase | Status | Approx turns | ~Input tokens | ~Output tokens | Notes |
+|---|---|---|---|---|---|
+| **Phase 0** — Project setup + docs | ✅ done | ~30 | ~250K | ~40K | Docs bundle, .editorconfig, folder tree, asmdefs, Android target |
+| **Phase 1** — Desert circuit env | ✅ done | ~40 | ~500K | ~60K | Terrain, sand layers, HDRI, EasyRoads3D circuit, 84 track-side props |
+| **Phase 2** — Car physics | ✅ done | ~50 | ~800K | ~90K | RMCar26 wired, `CarController` + Drivetrain/GearBox/HandBrake/SteeringAssist, materials URP-fixed, reverse logic |
+| **Phase 3** — Camera cycle (chase / cinematic / broadcast / look-back) | ✅ done | ~15 | ~200K | ~25K | Cinemachine 3-cam cycle, hold-to-look-back, `CameraRig` priority pattern |
+| **Phase 4** — Touch HUD | ✅ done | ~35 | ~450K | ~55K | Steering arrows, pedals, RPM/gear/speed readouts, `TouchInputProvider`, keyboard fallback |
+| **Phase 5** — Settings / tuning panel | ✅ done | ~30 | ~400K | ~50K | 6-tab settings, drivetrain / transmission / camber / audio / graphics / about, live TuningState binding |
+| **Phase 6** — Preset system (0–13) | ⏭ deferred | – | – | – | Sliders + drivetrain shipped in Phase 5; numbered-preset picker not built (out of scope after Phase 5 covered the tuning surface) |
+| **Phase 7** — Damage system | ✅ done | ~40 | ~500K | ~65K | `ImpactReceiver`, `PaintDamage` clone-material trick (saved 132 MB), `DamageCascade`, `ImpactVfx` sparks + dust, `CarHealth` |
+| **Phase 8** — Polish (post-FX / SFX / particles) | ✅ done | ~20 | ~250K | ~35K | Desert URP post-process profile, 4-source engine mixer, tire screech, skid trails |
+| **Phase 9** — Optimization pass | ✅ done | ~25 | ~300K | ~45K | 12-item catalogue, StressTestCapture stress test, before/after commit, on-device M31 validation |
+| **Phase 10** — Character enter/exit (stretch) | ⏭ skipped | – | – | – | Deferred per user — not on the critical path for the interview submission |
+| **Phase 11** — Documentation finalization + PDF export | 🔄 in progress | ~10 | ~120K | ~20K | OPTIMIZATION consolidated, PDF pipeline via Chrome headless, all Doc PDFs generated |
+| **Running total (estimated)** | – | ~295 | **~3.77M** | **~485K** | Rough estimate — **verify via Anthropic Console** |
 
 ---
 
@@ -61,12 +61,12 @@ Some token spend does not slot neatly into a phase:
 
 ## Rough cost estimate (informational only)
 
-At current running total (~1.55M input, ~190K output) using Opus 4.7 (1M context) pricing:
+At the updated running total (~3.77M input, ~485K output) using Opus 4.7 (1M context) pricing:
 
 ```
-Input:  1.55M × $15 / 1M = ~$23.25
-Output: 0.19M × $75 / 1M = ~$14.25
-                   Total: ~$37.50
+Input:  3.77M × $15 / 1M = ~$56.55
+Output: 0.485M × $75 / 1M = ~$36.38
+                    Total: ~$92.93
 ```
 
 **Again — check the Anthropic Console for the real number.** Depending on cache-read discounts (Claude API prompt caching gives 90% discount on cached input), real spend is likely **significantly lower** than the naive estimate above.

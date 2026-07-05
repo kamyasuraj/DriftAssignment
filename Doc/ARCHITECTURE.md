@@ -73,38 +73,54 @@ Dependency direction is enforced by asmdefs: **UI → Vehicle**, never reverse; 
 
 **Per frame tick**
 ```
-Input.Read()  →  CarController.FixedUpdate()  →  WheelColliders  →  Rigidbody
-                                                        │
-                                                        ├─ event: OnRpmChanged   → HUD updates needle
-                                                        ├─ event: OnGearChanged  → HUD updates gear
-                                                        └─ event: OnSpeedChanged → HUD updates KM/H
+Input.Read()
+   ↓
+CarController.FixedUpdate()
+   ↓
+WheelColliders → Rigidbody
+   ↓
+fires events:
+   ├─ OnRpmChanged   → HUD updates the needle
+   ├─ OnGearChanged  → HUD updates the gear text
+   └─ OnSpeedChanged → HUD updates KM/H
 ```
 
 **Tuning change (slider drag)**
 ```
-User drags slider → TuningMenuController.OnValueChanged → TuningState.SetSpringForce(v)
-                                                            │
-                                                            └─ event: OnTuningChanged
-                                                                    │
-CarController listens ← ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┘
-CarController applies new value to WheelColliders
+User drags slider
+   ↓
+TuningMenuController.OnValueChanged
+   ↓
+TuningState.SetSpringForce(v)
+   ↓
+fires OnTuningChanged
+   ↓
+CarController listens
+   ↓
+applies new value to WheelColliders
 ```
 
 **Preset apply**
 ```
-PresetPicker.Select(presetSO) → TuningPreset.CopyTo(TuningState) → OnTuningChanged fires
-                                                                     │
-                                     UI sliders update from state ◄─┘
+PresetPicker.Select(presetSO)
+   ↓
+TuningPreset.CopyTo(TuningState)
+   ↓
+fires OnTuningChanged
+   ↓
+UI sliders re-read state and update
 ```
 
 **Collision**
 ```
-PhysX OnCollisionEnter → ImpactReceiver.HandleCollision(contacts)
-                            │
-                            ├─ Route to nearest DentableMesh   (Stage A: vertex displace)
-                            └─ Add to nearest DetachablePart._accumulatedImpact
-                                    │
-                                    └─ if > breakThreshold → Detach() (Stage B)
+PhysX OnCollisionEnter
+   ↓
+ImpactReceiver.HandleCollision(contacts)
+   ├─ Route to nearest DentableMesh
+   │      (Stage A: vertex displacement)
+   └─ Add impulse to nearest DetachablePart._accumulatedImpact
+          ↓
+          if > breakThreshold → Detach() (Stage B)
 ```
 
 ---

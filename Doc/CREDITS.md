@@ -21,13 +21,15 @@ Every asset shipped in this project is listed below with its source and license.
 
 | Font | Source | License | Used in |
 |---|---|---|---|
-| _(TBD)_ | _(TBD)_ | _(TBD)_ | _(TBD)_ |
+| **LiberationSans SDF** (+ Fallback) | Ships with Unity's TextMeshPro package (Google's Liberation Sans) | SIL Open Font License 1.1 | Every HUD and Settings-panel `TMP_Text` — no custom font imported |
 
 ## Audio
 
-| Clip | Source | License | Used in |
-|---|---|---|---|
-| _(TBD)_ | _(TBD)_ | _(TBD)_ | _(TBD)_ |
+All audio credits are consolidated in the **Assets** table above (Sonniss GDC
+2024 subset + Kenney Impact Sounds subset). No separate audio-only assets are
+referenced. All AudioClips ship with per-clip Android platform overrides
+(Vorbis for clips > 3 s, ADPCM for shorter samples) — see
+[OPTIMIZATION.md §2](OPTIMIZATION.md).
 
 ## Code / Reference
 
