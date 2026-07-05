@@ -4,6 +4,7 @@
     "references": [
         "DriftAssignment.Core",
         "DriftAssignment.Vehicle",
+        "DriftAssignment.Damage",
         "Unity.InputSystem"
     ],
     "includePlatforms": [],

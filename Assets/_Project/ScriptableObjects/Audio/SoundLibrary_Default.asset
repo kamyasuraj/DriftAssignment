@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5241082841e51704ba8b0611bf22750e, type: 3}
   m_Name: SoundLibrary_Default
   m_EditorClassIdentifier: 
-  EngineSlow: {fileID: 0}
-  EngineIdle: {fileID: 8300000, guid: 268d4682fd8fc9e4fb9ed337d5dba7e1, type: 3}
-  EngineFast: {fileID: 8300000, guid: 94fd2a35d72c9b44e9623c4e2e4c5024, type: 3}
+  EngineStart: {fileID: 8300000, guid: 77aab9aac3768bb4ca08bbdd7d900ad1, type: 3}
+  EngineIdle: {fileID: 8300000, guid: dfca645d743788f439f73c1e82e37ce3, type: 3}
+  EngineBlips:
+  - {fileID: 8300000, guid: 4b9cce860ac1b8f48afa1e37d28403a8, type: 3}
+  - {fileID: 8300000, guid: 356eff775b29071499b1a19e0003f9b4, type: 3}
   HandBrakeInterior: {fileID: 8300000, guid: 7828865f94a3edc4bbc58e4963290dc6, type: 3}
+  EngineSlow: {fileID: 0}
+  EngineFast: {fileID: 8300000, guid: 94fd2a35d72c9b44e9623c4e2e4c5024, type: 3}
   DriftBrakingCornering: {fileID: 8300000, guid: 755bc0b94e8b3dc40832dad6866915fe, type: 3}
   RaceStart: {fileID: 8300000, guid: eca43f6a349965b4b941e23eb858cd68, type: 3}
   PassBy: {fileID: 8300000, guid: 8cb57e8ab5e2c5945910bb4a23076b29, type: 3}

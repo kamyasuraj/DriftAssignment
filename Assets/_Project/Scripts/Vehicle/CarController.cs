@@ -41,6 +41,12 @@ namespace DriftAssignment.Vehicle
         public int CurrentGear => _gearBox?.CurrentGear ?? 1;
         public float SpeedKmh => _rigidbody != null ? _rigidbody.linearVelocity.magnitude * 3.6f : 0f;
 
+        // Latest input snapshot — updated each FixedUpdate. Read-only for other systems (CarAudio).
+        public float ThrottleInput { get; private set; }
+        public float BrakeInput { get; private set; }
+        public float SteerInput { get; private set; }
+        public bool HandBrakeActive { get; private set; }
+
         private void Awake()
         {
             _rigidbody = GetComponent<Rigidbody>();
@@ -109,6 +115,11 @@ namespace DriftAssignment.Vehicle
             var throttle = _input.Throttle;
             var brake = _input.Brake;
             var steer = Mathf.Clamp(_input.Steer, -1f, 1f);
+
+            ThrottleInput = throttle;
+            BrakeInput = brake;
+            SteerInput = steer;
+            HandBrakeActive = _input.HandBrake;
 
             var localVel = transform.InverseTransformDirection(_rigidbody.linearVelocity);
             var forwardVel = localVel.z;
