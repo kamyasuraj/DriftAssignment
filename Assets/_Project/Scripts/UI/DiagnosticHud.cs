@@ -1,23 +1,20 @@
-using DriftAssignment.Damage;
 using DriftAssignment.Vehicle;
 using UnityEngine;
 
 namespace DriftAssignment.UI
 {
-    /// OnGUI diagnostic bar stretched across the bottom of the screen. Stats
-    /// (FPS / Speed / Gear / RPM / Throttle / Brake / Handbrake / Health) rendered
-    /// on one centered line. Zero UI-canvas dependencies.
+    /// OnGUI diagnostic bar stretched across the bottom of the screen. Shows
+    /// stats that the game HUD does NOT already display: FPS, Throttle, Brake,
+    /// Handbrake. Zero UI-canvas dependencies.
     [DisallowMultipleComponent]
     public class DiagnosticHud : MonoBehaviour
     {
         [SerializeField] private CarController _car;
-        [SerializeField] private CarHealth _health;
         [SerializeField] private int _barHeight = 46;
         [SerializeField] private int _fontSize = 18;
         [SerializeField] private int _statSpacing = 32;
         [SerializeField] private Color _bgColor = new Color(0f, 0f, 0f, 0.6f);
         [SerializeField] private Color _labelColor = new Color(0.75f, 0.9f, 0.75f, 1f);
-        [SerializeField] private Color _valueColor = new Color(1f, 1f, 0.6f, 1f);
 
         private float _fpsSmoothed;
         private GUIStyle _statStyle;
@@ -27,7 +24,6 @@ namespace DriftAssignment.UI
         private void Awake()
         {
             if (_car == null) _car = GetComponent<CarController>();
-            if (_health == null) _health = GetComponent<CarHealth>();
         }
 
         private void Update()
@@ -74,34 +70,14 @@ namespace DriftAssignment.UI
             GUILayout.FlexibleSpace();
 
             Stat("FPS", $"{_fpsSmoothed:0}");
-            Gap();
             if (_car != null)
             {
-                var gearLabel = _car.CurrentGear == 0 ? "R" : _car.CurrentGear == 1 ? "N" : (_car.CurrentGear - 1).ToString();
-                Stat("SPEED", $"{_car.SpeedKmh:0} km/h");
-                Gap();
-                Stat("GEAR", gearLabel);
-                Gap();
-                Stat("RPM", $"{_car.EngineRpm:0}");
                 Gap();
                 Stat("THROTTLE", $"{_car.ThrottleInput:0.00}");
                 Gap();
                 Stat("BRAKE", $"{_car.BrakeInput:0.00}");
                 Gap();
                 Stat("HANDBRAKE", _car.HandBrakeActive ? "<color=#ff7070>ON</color>" : "off");
-            }
-            else
-            {
-                Stat("CAR", "—");
-            }
-
-            if (_health != null)
-            {
-                Gap();
-                var hp = _health.HealthPercent;
-                string hpColor = hp > 60f ? "#a0ff90" : hp > 30f ? "#ffcc60" : "#ff5050";
-                var text = $"<color=#c0e0c0>HEALTH</color> <color={hpColor}>{hp:0}%</color>";
-                GUILayout.Label(text, _statStyle, GUILayout.Height(_barHeight));
             }
 
             GUILayout.FlexibleSpace();

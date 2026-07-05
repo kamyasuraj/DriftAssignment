@@ -142,6 +142,13 @@ namespace DriftAssignment.Vehicle
                     inReverse = false;
                     if (_debugLog) Debug.Log("[CarController] Auto → 1st (throttle from stopped reverse)", this);
                 }
+                else if (throttle > 0.1f && _gearBox.CurrentGear == 1)
+                {
+                    // Neutral → first forward when player accelerates from rest.
+                    // Without this, gear ratio stays at 0 and the car can't move.
+                    _gearBox.SetForwardFirst();
+                    if (_debugLog) Debug.Log("[CarController] Auto → 1st (throttle from neutral)", this);
+                }
             }
 
             // In reverse, S = motor drive (backwards), W = brake to stop.

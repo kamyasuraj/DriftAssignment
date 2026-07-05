@@ -3,9 +3,13 @@
     "rootNamespace": "DriftAssignment.UI",
     "references": [
         "DriftAssignment.Core",
+        "DriftAssignment.Input",
         "DriftAssignment.Vehicle",
         "DriftAssignment.Damage",
-        "Unity.InputSystem"
+        "DriftAssignment.Camera",
+        "Unity.InputSystem",
+        "Unity.TextMeshPro",
+        "Unity.RenderPipelines.Universal.Runtime"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

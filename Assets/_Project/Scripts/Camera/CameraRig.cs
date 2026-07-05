@@ -1,3 +1,4 @@
+using System;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -40,9 +41,14 @@ namespace DriftAssignment.Camera
         public int ActiveIndex => _activeIndex;
         public CinemachineCamera ActiveCamera => (_cycleCameras != null && _activeIndex < _cycleCameras.Length) ? _cycleCameras[_activeIndex] : null;
 
+        /// Fires whenever the active cycle camera changes (index passed in).
+        /// Consumers: HUD icon swap, camera-label text, etc.
+        public event Action<int> CameraChanged;
+
         private void OnEnable()
         {
             ApplyPriorities();
+            CameraChanged?.Invoke(_activeIndex);
         }
 
         private void Update()
@@ -61,6 +67,7 @@ namespace DriftAssignment.Camera
             if (_cycleCameras == null || _cycleCameras.Length == 0) return;
             _activeIndex = (_activeIndex + 1) % _cycleCameras.Length;
             ApplyPriorities();
+            CameraChanged?.Invoke(_activeIndex);
             if (_debugLog) Debug.Log($"[CameraRig] Cycled → {ActiveCamera?.name} (idx {_activeIndex})", this);
         }
 
@@ -80,6 +87,7 @@ namespace DriftAssignment.Camera
             if (_cycleCameras == null || _cycleCameras.Length == 0) return;
             _activeIndex = Mathf.Clamp(index, 0, _cycleCameras.Length - 1);
             ApplyPriorities();
+            CameraChanged?.Invoke(_activeIndex);
         }
 
         private void ApplyPriorities()
