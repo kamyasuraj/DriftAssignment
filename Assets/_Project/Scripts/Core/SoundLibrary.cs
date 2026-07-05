@@ -7,11 +7,15 @@ namespace DriftAssignment.Core
     [CreateAssetMenu(fileName = "SoundLibrary", menuName = "Drift/Sound Library", order = 20)]
     public class SoundLibrary : ScriptableObject
     {
-        [Header("Engine — split clips (state machine)")]
+        [Header("Engine — crossfade layers (Rotary X8 pack)")]
         public AudioClip EngineStart;
         public AudioClip EngineIdle;
-        [Tooltip("3 rev blips, ordered by intensity: [0]=light tap, [1]=medium, [2]=hard")]
-        public AudioClip[] EngineBlips;
+        [Tooltip("Low RPM loop (off-throttle)")]
+        public AudioClip EngineLow;
+        [Tooltip("Mid RPM loop (off-throttle)")]
+        public AudioClip EngineMed;
+        [Tooltip("High RPM loop (off-throttle)")]
+        public AudioClip EngineHigh;
         public AudioClip HandBrakeInterior;
 
         [Header("Engine — long-form recordings (legacy / cinematic use)")]

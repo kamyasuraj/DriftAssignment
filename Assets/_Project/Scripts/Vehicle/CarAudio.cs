@@ -4,6 +4,14 @@ using UnityEngine;
 
 namespace DriftAssignment.Vehicle
 {
+    /// Engine audio — RPM-driven 4-layer crossfade mixer.
+    /// Layers: Idle → Low → Med → High, each with a triangular volume envelope
+    /// centered on a normalized RPM and a per-layer pitch that shifts as RPM
+    /// moves through the layer (granular pitch modulation). Sounds are the
+    /// off-throttle loops from the Rotary X8 Free pack.
+    ///
+    /// Engine kicks in automatically at scene start after the car settles —
+    /// no player input required. Blip/rev-brake logic removed.
     [DisallowMultipleComponent]
     public class CarAudio : MonoBehaviour
     {
@@ -15,26 +23,52 @@ namespace DriftAssignment.Vehicle
         [SerializeField] private SoundLibrary _sounds;
 
         [Header("Audio Sources")]
-        [Tooltip("Loops EngineIdle after startup")]
-        [SerializeField] private AudioSource _engineLoopSource;
-        [Tooltip("PlayOneShot for EngineStart and blips (overlays the loop cleanly)")]
-        [SerializeField] private AudioSource _engineOneShotSource;
+        [Tooltip("One-shot: EngineStart (startup)")]
+        [SerializeField] private AudioSource _startSource;
+        [Tooltip("Loop: EngineIdle (peaks at MinRpm)")]
+        [SerializeField] private AudioSource _idleSource;
+        [Tooltip("Loop: Low RPM")]
+        [SerializeField] private AudioSource _lowSource;
+        [Tooltip("Loop: Med RPM")]
+        [SerializeField] private AudioSource _medSource;
+        [Tooltip("Loop: High RPM")]
+        [SerializeField] private AudioSource _highSource;
         [SerializeField] private AudioSource _tireSource;
         [SerializeField] private AudioSource _impactSource;
 
-        [Header("Idle volume mapping (subtle rise with RPM)")]
-        [Range(0f, 1f)] [SerializeField] private float _idleMinVolume = 0.35f;
-        [Range(0f, 1f)] [SerializeField] private float _idleMaxVolume = 0.7f;
+        [Header("Auto-start")]
+        [Tooltip("Delay after Awake before engine startup fires — lets the car physics settle onto the ground.")]
+        [SerializeField] private float _autoStartDelaySec = 0.8f;
 
-        [Header("Throttle tap → blip detection")]
-        [SerializeField] private float _tapMaxDurationSec = 0.4f;
-        [SerializeField] private float _tapThreshold = 0.2f;
-        [SerializeField] private float _tapMinPeak = 0.3f;
+        [Header("RPM layer crossfade (normalized 0..1)")]
+        [Range(0f, 1f)] [SerializeField] private float _idleCenter = 0f;
+        [Range(0.05f, 1f)] [SerializeField] private float _idleWidth = 0.35f;
+        [Range(0f, 1f)] [SerializeField] private float _lowCenter = 0.28f;
+        [Range(0.05f, 1f)] [SerializeField] private float _lowWidth = 0.45f;
+        [Range(0f, 1f)] [SerializeField] private float _medCenter = 0.6f;
+        [Range(0.05f, 1f)] [SerializeField] private float _medWidth = 0.5f;
+        [Range(0f, 1f)] [SerializeField] private float _highCenter = 0.92f;
+        [Range(0.05f, 1f)] [SerializeField] private float _highWidth = 0.35f;
 
-        [Header("Rev while braking")]
-        [SerializeField] private float _revBrakeThrottleMin = 0.4f;
-        [SerializeField] private float _revBrakeBrakeMin = 0.5f;
-        [SerializeField] private float _revBrakeCooldownSec = 1.2f;
+        [Header("Speed → mixer drive")]
+        [Tooltip("Speed at which the layer-drive signal reaches 1.0 — treat as 'cruising speed where the high loop should be dominant'.")]
+        [SerializeField] private float _speedReferenceKmh = 120f;
+        [Tooltip("How much of the layer volume comes from speed vs. RPM. 0 = pure RPM (realistic), 1 = pure speed (arcadey). 0.6 gives the perception that revs climb with speed even when the auto-box upshifts early.")]
+        [Range(0f, 1f)] [SerializeField] private float _speedBlend = 0.65f;
+
+        [Header("Pitch modulation (granular feel)")]
+        [Tooltip("Base pitch each loop plays at when at its center RPM.")]
+        [SerializeField] private float _basePitch = 1.0f;
+        [Tooltip("Amount pitch shifts per unit of normalized-RPM distance from the layer center.")]
+        [SerializeField] private float _pitchPerRpm = 0.9f;
+        [Tooltip("Clamp for extreme pitch swings.")]
+        [SerializeField] private Vector2 _pitchClamp = new Vector2(0.7f, 1.6f);
+        [Tooltip("Master gain applied on top of all layers.")]
+        [Range(0f, 2f)] [SerializeField] private float _masterVolume = 1f;
+        [Tooltip("How quickly layer volumes move toward their target each second.")]
+        [SerializeField] private float _volumeSmoothing = 12f;
+        [Tooltip("How quickly pitches move toward their target each second.")]
+        [SerializeField] private float _pitchSmoothing = 8f;
 
         [Header("Tire — Drift Screech")]
         [Range(0f, 1f)] [SerializeField] private float _tireSlipThreshold = 0.2f;
@@ -52,16 +86,6 @@ namespace DriftAssignment.Vehicle
 
         private Rigidbody _rigidbody;
         private EngineState _state = EngineState.Off;
-
-        // Tap detection
-        private bool _throttleActive;
-        private float _throttleRiseTime;
-        private float _throttlePeak;
-
-        // Rev-brake cooldown
-        private float _lastRevBrakeTime = -999f;
-
-        // Impact cooldown
         private float _lastImpactTime = -999f;
 
         private void Awake()
@@ -75,25 +99,22 @@ namespace DriftAssignment.Vehicle
                 enabled = false;
                 return;
             }
-            if (_engineLoopSource == null || _engineOneShotSource == null || _tireSource == null || _impactSource == null)
+            if (_idleSource == null || _lowSource == null || _medSource == null || _highSource == null
+                || _startSource == null || _tireSource == null || _impactSource == null)
             {
                 Debug.LogError("[CarAudio] One or more AudioSources not assigned.", this);
                 enabled = false;
                 return;
             }
 
-            // Stop everything at start — engine is off until first input
-            _engineLoopSource.Stop();
-            _engineLoopSource.clip = _sounds.EngineIdle;
-            _engineLoopSource.loop = true;
-            _engineLoopSource.playOnAwake = false;
-            _engineLoopSource.volume = _idleMinVolume;
-            _engineLoopSource.spatialBlend = 0f;
+            ConfigureLoop(_idleSource, _sounds.EngineIdle);
+            ConfigureLoop(_lowSource, _sounds.EngineLow);
+            ConfigureLoop(_medSource, _sounds.EngineMed);
+            ConfigureLoop(_highSource, _sounds.EngineHigh);
 
-            _engineOneShotSource.playOnAwake = false;
-            _engineOneShotSource.spatialBlend = 0f;
+            _startSource.playOnAwake = false;
+            _startSource.spatialBlend = 0f;
 
-            // Tire screech clip primed (silent until slip detected)
             if (_sounds.DriftBrakingCornering != null)
             {
                 _tireSource.clip = _sounds.DriftBrakingCornering;
@@ -104,30 +125,30 @@ namespace DriftAssignment.Vehicle
                 _tireSource.Play();
             }
 
-            if (_debugLog) Debug.Log("[CarAudio] Awake. Engine OFF. Waiting for first input.", this);
+            if (_debugLog) Debug.Log("[CarAudio] Awake — engine will auto-start after settle delay.", this);
         }
 
-        private void Update()
+        private static void ConfigureLoop(AudioSource src, AudioClip clip)
         {
-            switch (_state)
-            {
-                case EngineState.Off:
-                    if (AnyInputActive()) StartCoroutine(StartupSequence());
-                    break;
-                case EngineState.Running:
-                    UpdateBlipDetection();
-                    UpdateIdleVolume();
-                    UpdateTire();
-                    break;
-            }
+            src.Stop();
+            src.clip = clip;
+            src.loop = true;
+            src.playOnAwake = false;
+            src.volume = 0f;
+            src.spatialBlend = 0f;
         }
 
-        private bool AnyInputActive()
+        private void Start()
         {
-            return _car.ThrottleInput > 0.1f
-                || _car.BrakeInput > 0.1f
-                || _car.HandBrakeActive
-                || Mathf.Abs(_car.SteerInput) > 0.1f;
+            StartCoroutine(AutoStart());
+        }
+
+        private IEnumerator AutoStart()
+        {
+            // Let physics settle so the startup sound doesn't overlap the
+            // spawn-drop-thud collision.
+            yield return new WaitForSeconds(_autoStartDelaySec);
+            yield return StartupSequence();
         }
 
         private IEnumerator StartupSequence()
@@ -137,86 +158,67 @@ namespace DriftAssignment.Vehicle
 
             if (_sounds.EngineStart != null)
             {
-                _engineOneShotSource.PlayOneShot(_sounds.EngineStart);
-                // Start the idle loop 85% through the start clip so they blend
+                _startSource.PlayOneShot(_sounds.EngineStart);
+                // Overlap the idle+layer loops onto the tail of the start clip
                 yield return new WaitForSeconds(_sounds.EngineStart.length * 0.85f);
             }
 
-            if (_engineLoopSource.clip != null)
-            {
-                _engineLoopSource.volume = _idleMinVolume;
-                _engineLoopSource.Play();
-            }
+            StartLoopSilent(_idleSource);
+            StartLoopSilent(_lowSource);
+            StartLoopSilent(_medSource);
+            StartLoopSilent(_highSource);
 
             _state = EngineState.Running;
-            if (_debugLog) Debug.Log("[CarAudio] Engine → Running (idle loop started)", this);
+            if (_debugLog) Debug.Log("[CarAudio] Engine → Running (mixer live)", this);
         }
 
-        private void UpdateBlipDetection()
+        private static void StartLoopSilent(AudioSource src)
         {
-            var throttle = _car.ThrottleInput;
-            var brake = _car.BrakeInput;
-
-            // Rev while braking — brake + throttle held simultaneously → periodic blip
-            if (brake > _revBrakeBrakeMin && throttle > _revBrakeThrottleMin)
-            {
-                if (Time.time - _lastRevBrakeTime > _revBrakeCooldownSec)
-                {
-                    PlayBlip(throttle, "rev-brake");
-                    _lastRevBrakeTime = Time.time;
-                }
-                _throttleActive = false; // don't also fire tap blip
-                return;
-            }
-
-            // Throttle tap detection: rising edge → peak → release
-            if (throttle > _tapThreshold && !_throttleActive)
-            {
-                _throttleActive = true;
-                _throttleRiseTime = Time.time;
-                _throttlePeak = throttle;
-            }
-            else if (_throttleActive)
-            {
-                _throttlePeak = Mathf.Max(_throttlePeak, throttle);
-
-                // Held too long → not a tap, cancel silently (they're actually driving)
-                if (Time.time - _throttleRiseTime > _tapMaxDurationSec && throttle > _tapThreshold)
-                {
-                    _throttleActive = false;
-                }
-                // Release within window → fire blip
-                else if (throttle < 0.1f)
-                {
-                    _throttleActive = false;
-                    var dur = Time.time - _throttleRiseTime;
-                    if (dur < _tapMaxDurationSec && _throttlePeak > _tapMinPeak)
-                        PlayBlip(_throttlePeak, "tap");
-                }
-            }
+            if (src == null || src.clip == null) return;
+            src.volume = 0f;
+            src.pitch = 1f;
+            src.Play();
         }
 
-        private void PlayBlip(float intensity, string reason)
+        private void Update()
         {
-            if (_sounds.EngineBlips == null || _sounds.EngineBlips.Length == 0) return;
-            int idx;
-            if (intensity < 0.5f) idx = 0;
-            else if (intensity < 0.85f) idx = 1;
-            else idx = 2;
-            idx = Mathf.Clamp(idx, 0, _sounds.EngineBlips.Length - 1);
-
-            var clip = _sounds.EngineBlips[idx];
-            if (clip == null) return;
-            _engineOneShotSource.PlayOneShot(clip);
-
-            if (_debugLog) Debug.Log($"[CarAudio] Blip {idx} ({reason}, intensity={intensity:F2})", this);
+            if (_state != EngineState.Running) return;
+            UpdateEngineMixer();
+            UpdateTire();
         }
 
-        private void UpdateIdleVolume()
+        private void UpdateEngineMixer()
         {
-            if (_engineLoopSource == null || _config == null) return;
+            if (_config == null) return;
             var rpmNorm = Mathf.InverseLerp(_config.MinRpm, _config.MaxRpm, _car.EngineRpm);
-            _engineLoopSource.volume = Mathf.Lerp(_idleMinVolume, _idleMaxVolume, rpmNorm);
+            var speedNorm = Mathf.Clamp01(_car.SpeedKmh / Mathf.Max(1f, _speedReferenceKmh));
+            // Hybrid drive: blends RPM (realistic) with speed (perceptual — kicks
+            // driving loops in even when the auto box holds RPM low at cruise).
+            var drive = Mathf.Lerp(rpmNorm, Mathf.Max(rpmNorm, speedNorm), _speedBlend);
+            var dt = Time.deltaTime;
+
+            ApplyLayer(_idleSource, drive, rpmNorm, _idleCenter, _idleWidth, dt);
+            ApplyLayer(_lowSource, drive, rpmNorm, _lowCenter, _lowWidth, dt);
+            ApplyLayer(_medSource, drive, rpmNorm, _medCenter, _medWidth, dt);
+            ApplyLayer(_highSource, drive, rpmNorm, _highCenter, _highWidth, dt);
+        }
+
+        private void ApplyLayer(AudioSource src, float drive, float rpmNorm, float center, float width, float dt)
+        {
+            if (src == null || !src.isPlaying) return;
+            // Volume envelope drives off the hybrid drive signal so speed can
+            // push driving loops up even when RPM is low.
+            var half = Mathf.Max(0.01f, width * 0.5f);
+            var dist = Mathf.Abs(drive - center);
+            var targetVolume = Mathf.Clamp01(1f - dist / half) * _masterVolume;
+            targetVolume = Mathf.SmoothStep(0f, 1f, targetVolume);
+
+            // Pitch still driven by actual RPM so it stays realistic.
+            var pitchShift = (rpmNorm - center) * _pitchPerRpm;
+            var targetPitch = Mathf.Clamp(_basePitch + pitchShift, _pitchClamp.x, _pitchClamp.y);
+
+            src.volume = Mathf.Lerp(src.volume, targetVolume, dt * _volumeSmoothing);
+            src.pitch = Mathf.Lerp(src.pitch, targetPitch, dt * _pitchSmoothing);
         }
 
         private void UpdateTire()

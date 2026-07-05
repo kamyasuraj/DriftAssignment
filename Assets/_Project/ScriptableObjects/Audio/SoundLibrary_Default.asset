@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5241082841e51704ba8b0611bf22750e, type: 3}
   m_Name: SoundLibrary_Default
   m_EditorClassIdentifier: 
-  EngineStart: {fileID: 8300000, guid: 77aab9aac3768bb4ca08bbdd7d900ad1, type: 3}
-  EngineIdle: {fileID: 8300000, guid: dfca645d743788f439f73c1e82e37ce3, type: 3}
-  EngineBlips:
-  - {fileID: 8300000, guid: 4b9cce860ac1b8f48afa1e37d28403a8, type: 3}
-  - {fileID: 8300000, guid: 356eff775b29071499b1a19e0003f9b4, type: 3}
+  EngineStart: {fileID: 8300000, guid: 9197666ad6b1f9945a4ab3f53df9bb9e, type: 3}
+  EngineIdle: {fileID: 8300000, guid: 198beec9810fad0489ee8e8e5117ddbf, type: 3}
+  EngineLow: {fileID: 8300000, guid: 383f4231c8d4c0b46802974b7d5e014e, type: 3}
+  EngineMed: {fileID: 8300000, guid: ad8e0a9484cfdd041ab0291a70840d1c, type: 3}
+  EngineHigh: {fileID: 8300000, guid: 2dc7ef2a7be74894e9ef442ca1d3b2c8, type: 3}
   HandBrakeInterior: {fileID: 8300000, guid: 7828865f94a3edc4bbc58e4963290dc6, type: 3}
   EngineSlow: {fileID: 0}
   EngineFast: {fileID: 8300000, guid: 94fd2a35d72c9b44e9623c4e2e4c5024, type: 3}
