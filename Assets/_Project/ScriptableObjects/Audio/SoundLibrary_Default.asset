@@ -21,6 +21,8 @@ MonoBehaviour:
   EngineSlow: {fileID: 0}
   EngineFast: {fileID: 8300000, guid: 94fd2a35d72c9b44e9623c4e2e4c5024, type: 3}
   DriftBrakingCornering: {fileID: 8300000, guid: 755bc0b94e8b3dc40832dad6866915fe, type: 3}
+  TireScreech: {fileID: 8300000, guid: fd774c42d8545934795a08157dce8bea, type: 3}
+  HandBrake: {fileID: 8300000, guid: b93acb65d5668794b911b160ee87ea0f, type: 3}
   RaceStart: {fileID: 8300000, guid: eca43f6a349965b4b941e23eb858cd68, type: 3}
   PassBy: {fileID: 8300000, guid: 8cb57e8ab5e2c5945910bb4a23076b29, type: 3}
   UphillPassBy: {fileID: 8300000, guid: e98840483c3e2a7499f357993b714aa4, type: 3}

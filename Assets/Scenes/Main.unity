@@ -1324,6 +1324,67 @@ MonoBehaviour:
   _config: {fileID: 11400000, guid: 78efd5ce366286d4483cc6295698ffe8, type: 2}
   _boundsPaddingWorld: 0.1
   _debugLog: 0
+--- !u!1 &244014223
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 244014224}
+  - component: {fileID: 244014225}
+  m_Layer: 0
+  m_Name: SkidTrail
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &244014224
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 244014223}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1089864146}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &244014225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 244014223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d41159810480310428eeae0dbbccd78a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _wheel: {fileID: 1089864147}
+  _sidewaysSlipThreshold: 0.75
+  _forwardSlipThreshold: 1.3
+  _trailWidth: 0.22
+  _trailLifetime: 8
+  _trailColor: {r: 0.18, g: 0.16, b: 0.16, a: 0.55}
+  _trailGroundOffset: 0.02
+  _smokePrefab: {fileID: 1642322455942316, guid: d26aaf76e6e2409448242b9a2d66f31f, type: 3}
+  _smokeMaterial: {fileID: 2100000, guid: 97de08415789a694eb7b2ac89fd4e9d9, type: 2}
+  _smokeRate: 60
+  _smokeLifetime: 1.9
+  _smokeColor: {r: 0.55, g: 0.53, b: 0.5, a: 0.75}
+  _prefabSmokeLifetime: 0.7
+  _prefabSmokeSpeedScale: 0.5
+  _prefabSmokeSizeScale: 0.6
+  _prefabSmokeGravity: 0.05
+  _debugLog: 0
 --- !u!1001 &248611994
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1798,7 +1859,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0.20027713, y: 0, z: 0, w: 0.9797393}
-  m_LocalPosition: {x: 103.1, y: 3.7, z: -171.7}
+  m_LocalPosition: {x: 63.356354, y: 3.7, z: -199.54663}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2387,7 +2448,7 @@ Transform:
   m_GameObject: {fileID: 433017809}
   serializedVersion: 2
   m_LocalRotation: {x: 0.20027712, y: 0, z: 0, w: 0.9797393}
-  m_LocalPosition: {x: 103.1, y: 3.7, z: -171.7}
+  m_LocalPosition: {x: 63.356354, y: 3.7, z: -199.54663}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -22211,7 +22272,8 @@ Transform:
   m_LocalPosition: {x: 0.78, y: 0.37, z: -1.51}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1579856508}
   m_Father: {fileID: 357076149}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &740162111 stripped
@@ -22788,7 +22850,8 @@ Transform:
   m_LocalPosition: {x: -0.78, y: 0.37, z: -1.51}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1960575536}
   m_Father: {fileID: 357076149}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!146 &801866459
@@ -23454,7 +23517,8 @@ Transform:
   m_LocalPosition: {x: 0.78, y: 0.37, z: 1.56}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1005833754}
   m_Father: {fileID: 357076149}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!146 &975937508
@@ -23718,6 +23782,67 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &1005833753
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1005833754}
+  - component: {fileID: 1005833755}
+  m_Layer: 0
+  m_Name: SkidTrail
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1005833754
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1005833753}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 975937507}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1005833755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1005833753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d41159810480310428eeae0dbbccd78a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _wheel: {fileID: 975937508}
+  _sidewaysSlipThreshold: 0.75
+  _forwardSlipThreshold: 1.3
+  _trailWidth: 0.22
+  _trailLifetime: 8
+  _trailColor: {r: 0.18, g: 0.16, b: 0.16, a: 0.55}
+  _trailGroundOffset: 0.02
+  _smokePrefab: {fileID: 1642322455942316, guid: d26aaf76e6e2409448242b9a2d66f31f, type: 3}
+  _smokeMaterial: {fileID: 2100000, guid: 97de08415789a694eb7b2ac89fd4e9d9, type: 2}
+  _smokeRate: 60
+  _smokeLifetime: 1.9
+  _smokeColor: {r: 0.55, g: 0.53, b: 0.5, a: 0.75}
+  _prefabSmokeLifetime: 0.7
+  _prefabSmokeSpeedScale: 0.5
+  _prefabSmokeSizeScale: 0.6
+  _prefabSmokeGravity: 0.05
+  _debugLog: 0
 --- !u!1 &1028347474
 GameObject:
   m_ObjectHideFlags: 0
@@ -24459,7 +24584,8 @@ Transform:
   m_LocalPosition: {x: -0.78, y: 0.37, z: 1.56}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 244014224}
   m_Father: {fileID: 357076149}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!146 &1089864147
@@ -26513,6 +26639,7 @@ Transform:
   - {fileID: 1003408342}
   - {fileID: 1767544303}
   - {fileID: 1028347475}
+  - {fileID: 1929959601}
   m_Father: {fileID: 1976696530}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1480257110 stripped
@@ -27256,6 +27383,67 @@ Transform:
   - {fileID: 1840235136}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1579856507
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1579856508}
+  - component: {fileID: 1579856509}
+  m_Layer: 0
+  m_Name: SkidTrail
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1579856508
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1579856507}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 736089735}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1579856509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1579856507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d41159810480310428eeae0dbbccd78a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _wheel: {fileID: 736089734}
+  _sidewaysSlipThreshold: 0.75
+  _forwardSlipThreshold: 1.3
+  _trailWidth: 0.22
+  _trailLifetime: 8
+  _trailColor: {r: 0.18, g: 0.16, b: 0.16, a: 0.55}
+  _trailGroundOffset: 0.02
+  _smokePrefab: {fileID: 1642322455942316, guid: d26aaf76e6e2409448242b9a2d66f31f, type: 3}
+  _smokeMaterial: {fileID: 2100000, guid: 97de08415789a694eb7b2ac89fd4e9d9, type: 2}
+  _smokeRate: 60
+  _smokeLifetime: 1.9
+  _smokeColor: {r: 0.55, g: 0.53, b: 0.5, a: 0.75}
+  _prefabSmokeLifetime: 0.7
+  _prefabSmokeSpeedScale: 0.5
+  _prefabSmokeSizeScale: 0.6
+  _prefabSmokeGravity: 0.05
+  _debugLog: 0
 --- !u!1 &1582164837 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3520142943609341817, guid: 9b9c8bf1364ff7f4380078dd15aa5acf, type: 3}
@@ -104611,6 +104799,135 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1925129249}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1929959600
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1929959601}
+  - component: {fileID: 1929959602}
+  m_Layer: 0
+  m_Name: HandBrakeSource
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1929959601
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1929959600}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1480115711}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1929959602
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1929959600}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &1946578608
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -104773,6 +105090,67 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3034100504684596714, guid: ca467163290938e44ace0851c793c8dd, type: 3}
   m_PrefabInstance: {fileID: 1948677959}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1960575535
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1960575536}
+  - component: {fileID: 1960575537}
+  m_Layer: 0
+  m_Name: SkidTrail
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1960575536
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1960575535}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 801866458}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1960575537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1960575535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d41159810480310428eeae0dbbccd78a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _wheel: {fileID: 801866459}
+  _sidewaysSlipThreshold: 0.75
+  _forwardSlipThreshold: 1.3
+  _trailWidth: 0.22
+  _trailLifetime: 8
+  _trailColor: {r: 0.18, g: 0.16, b: 0.16, a: 0.55}
+  _trailGroundOffset: 0.02
+  _smokePrefab: {fileID: 1642322455942316, guid: d26aaf76e6e2409448242b9a2d66f31f, type: 3}
+  _smokeMaterial: {fileID: 2100000, guid: 97de08415789a694eb7b2ac89fd4e9d9, type: 2}
+  _smokeRate: 60
+  _smokeLifetime: 1.9
+  _smokeColor: {r: 0.55, g: 0.53, b: 0.5, a: 0.75}
+  _prefabSmokeLifetime: 0.7
+  _prefabSmokeSpeedScale: 0.5
+  _prefabSmokeSizeScale: 0.6
+  _prefabSmokeGravity: 0.05
+  _debugLog: 0
 --- !u!1 &1968392722 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 95139061599167425, guid: 834b316c2b5f2e146ae22f9c7e385366, type: 3}
@@ -105239,7 +105617,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5414108620589773563, guid: 834b316c2b5f2e146ae22f9c7e385366, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 103.1
+      value: 63.356354
       objectReference: {fileID: 0}
     - target: {fileID: 5414108620589773563, guid: 834b316c2b5f2e146ae22f9c7e385366, type: 3}
       propertyPath: m_LocalPosition.y
@@ -105247,23 +105625,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5414108620589773563, guid: 834b316c2b5f2e146ae22f9c7e385366, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -164.2
+      value: -192.04663
       objectReference: {fileID: 0}
     - target: {fileID: 5414108620589773563, guid: 834b316c2b5f2e146ae22f9c7e385366, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.6749275
       objectReference: {fileID: 0}
     - target: {fileID: 5414108620589773563, guid: 834b316c2b5f2e146ae22f9c7e385366, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5414108620589773563, guid: 834b316c2b5f2e146ae22f9c7e385366, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.73788416
       objectReference: {fileID: 0}
     - target: {fileID: 5414108620589773563, guid: 834b316c2b5f2e146ae22f9c7e385366, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5414108620589773563, guid: 834b316c2b5f2e146ae22f9c7e385366, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -105271,7 +105649,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5414108620589773563, guid: 834b316c2b5f2e146ae22f9c7e385366, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -95.103
       objectReference: {fileID: 0}
     - target: {fileID: 5414108620589773563, guid: 834b316c2b5f2e146ae22f9c7e385366, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -105800,6 +106178,7 @@ MonoBehaviour:
   _highSource: {fileID: 1028347476}
   _tireSource: {fileID: 359849095}
   _impactSource: {fileID: 1072764934}
+  _handbrakeSource: {fileID: 1929959602}
   _autoStartDelaySec: 0.8
   _idleCenter: 0
   _idleWidth: 0.12

@@ -35,6 +35,8 @@ namespace DriftAssignment.Vehicle
         [SerializeField] private AudioSource _highSource;
         [SerializeField] private AudioSource _tireSource;
         [SerializeField] private AudioSource _impactSource;
+        [Tooltip("One-shot: HandBrake press")]
+        [SerializeField] private AudioSource _handbrakeSource;
 
         [Header("Auto-start")]
         [Tooltip("Delay after Awake before engine startup fires — lets the car physics settle onto the ground.")]
@@ -87,6 +89,7 @@ namespace DriftAssignment.Vehicle
         private Rigidbody _rigidbody;
         private EngineState _state = EngineState.Off;
         private float _lastImpactTime = -999f;
+        private bool _handBrakeLastFrame;
 
         private void Awake()
         {
@@ -115,14 +118,22 @@ namespace DriftAssignment.Vehicle
             _startSource.playOnAwake = false;
             _startSource.spatialBlend = 0f;
 
-            if (_sounds.DriftBrakingCornering != null)
+            var tireClip = _sounds.TireScreech != null ? _sounds.TireScreech : _sounds.DriftBrakingCornering;
+            if (tireClip != null)
             {
-                _tireSource.clip = _sounds.DriftBrakingCornering;
+                _tireSource.clip = tireClip;
                 _tireSource.loop = true;
                 _tireSource.playOnAwake = false;
                 _tireSource.spatialBlend = 0f;
                 _tireSource.volume = 0f;
                 _tireSource.Play();
+            }
+
+            if (_handbrakeSource != null)
+            {
+                _handbrakeSource.playOnAwake = false;
+                _handbrakeSource.loop = false;
+                _handbrakeSource.spatialBlend = 0f;
             }
 
             if (_debugLog) Debug.Log("[CarAudio] Awake — engine will auto-start after settle delay.", this);
@@ -185,6 +196,19 @@ namespace DriftAssignment.Vehicle
             if (_state != EngineState.Running) return;
             UpdateEngineMixer();
             UpdateTire();
+            UpdateHandBrake();
+        }
+
+        private void UpdateHandBrake()
+        {
+            if (_car == null) return;
+            var pressed = _car.HandBrakeActive;
+            if (pressed && !_handBrakeLastFrame && _handbrakeSource != null && _sounds.HandBrake != null)
+            {
+                _handbrakeSource.PlayOneShot(_sounds.HandBrake);
+                if (_debugLog) Debug.Log("[CarAudio] HandBrake one-shot", this);
+            }
+            _handBrakeLastFrame = pressed;
         }
 
         private void UpdateEngineMixer()

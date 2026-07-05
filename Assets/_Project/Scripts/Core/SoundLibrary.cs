@@ -24,6 +24,10 @@ namespace DriftAssignment.Core
 
         [Header("Drift / Rally (drift-feel + races)")]
         public AudioClip DriftBrakingCornering;
+        [Tooltip("Loop played when tires slip — from Rotary X8 pack")]
+        public AudioClip TireScreech;
+        [Tooltip("One-shot on handbrake press — from Rotary X8 pack")]
+        public AudioClip HandBrake;
         public AudioClip RaceStart;
         public AudioClip PassBy;
         public AudioClip UphillPassBy;
